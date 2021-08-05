@@ -63,12 +63,14 @@
                 {{ partial "pic_set.html" (dict "pic_set" .) }}
             {{ end }}
             
+            <!-- todo format the name of this part -->
+            <!-- add-on info 3: link -->
             {{ $link_link := .Params.link }}
             {{ $link_logo := .Params.link_logo }}
             {{ $link_text := .Params.link_text }}
-
+            
             {{ with .Params.link }}
-                {{ partial "link-block.html" (dict "logo" $link_logo "a" $link_link "word" $link_text)}}
+                {{ partial "link-block.html" (dict "logo" $link_logo "a" $link_link "word" $link_text "baseurl" $.Site.BaseURL)}}
             {{ end }}
 
             <!-- 附注信息 -->
