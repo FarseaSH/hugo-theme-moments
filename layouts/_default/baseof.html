@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {{ partial "head.html" . }}
+    </head>
+    <body>
+        <div class="page">
+            {{ partial "header.html" . }}
+
+            {{ block "main" . }}
+            {{ end }}
+        
+            <!-- Pagination -->
+            <nav aria-label="Page navigation .pagination-lg">
+                <ul class="pagination justify-content-center">
+                    {{ block "pagination" . }}
+                    {{ end }}
+                </ul>
+            </nav>
+
+            {{ partial "footer.html" . }}
+        </div>
+
+        {{ partial "after-content-js.html" . }}
+
+    </body>
+
+</html>

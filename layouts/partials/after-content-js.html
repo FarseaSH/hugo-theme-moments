@@ -1,0 +1,12 @@
+<!-- Like button -->
+<script>
+    $("i").click(function(){
+        if ($(this).attr("red") == 'true'){
+            $(this).animate({color:"#808080"});
+            $(this).attr("red", false);
+        } else {
+            $(this).animate({color:"#ff0000"});
+            $(this).attr("red", true);
+        }
+    });
+</script>

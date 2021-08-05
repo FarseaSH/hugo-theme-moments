@@ -1,0 +1,135 @@
+/* 主框架 */
+body{
+    background-color: #f5f5f5;
+}
+.page{
+    max-width: 1150px;
+    margin: auto;
+    background-color: white;
+}
+
+@media (min-width:1150px) {
+    .page{
+        margin-top: 50px;
+    }
+}
+
+.bodycontainer{
+    max-width: 760px;
+    /* padding-right: 80px; */
+}
+
+/* 时间 */
+.time{
+    text-align: right;
+    padding-right: 60px;
+    /* white-space: nowrap; */
+}
+@media (max-width: 576px){
+    .time{
+        text-align: center;
+        padding-right: 15px;
+    }
+}
+@media (max-width: 720px) and (min-width:576px){
+    .time{
+        padding-right: 20px;
+    }
+}
+
+/* 抬头 */
+.avatar{
+    max-height: 45px;
+    float: left;
+    margin-bottom: 10px;
+}
+
+.intro{
+    float: left;
+    padding-left: 5px;
+}
+
+.name{
+    color:#186D9C!important;
+    margin-bottom: 0;
+    line-height: 1.1;
+}
+
+.tag::before{
+    content:"#"
+}
+.tag{
+    font-size: 80%;
+    margin-left: 0px;
+    margin-right: 10px;
+}
+
+/* 正文 */
+.context{
+    clear: left;
+    margin-bottom: 10px;
+}
+
+/* 图片 */
+.pic1{
+    max-width: 80%; 
+    max-height: 250px;
+    padding-bottom:10px;
+    margin-top: 5px; 
+}
+/* 图片集 */
+#carouselExampleIndicators{
+    width: 80%; 
+    padding-bottom:10px;
+    margin-top: 5px;
+}
+
+.pic-in-set{
+    height: 250px;
+}
+
+/* 内容附带的超链接 */
+.share-link-block{
+    padding-bottom:10px; 
+    padding-top:10px; 
+    margin-bottom:10px;
+    background: #f7f7f7;
+}
+.link-table{
+    margin-left: 10%;
+    max-width: 80%;
+}
+.link-logo{
+    max-width: 50px;
+    max-height: 50px;
+}
+.share-link-block a{
+    color:#17a2b8;
+    word-wrap: break-word;
+}
+
+/* 附注信息 */
+.note{
+    font-size: 80%;
+    text-indent: 20px;
+    float: left;
+    margin-bottom: 10px;
+}
+
+/* footer底注 */
+.footer {
+    background-color: #f5f5f5;
+    text-align: center;
+    font-size: 95%;
+}
+.footcontainer {
+    width: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.footcontainer a{ 
+    text-decoration: underline !important; 
+    color:#6c757d !important;
+} 
+
