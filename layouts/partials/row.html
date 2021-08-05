@@ -13,7 +13,8 @@
             {{ with .Params.avatar }}
                 <img src='{{ . }}' class="avatar">
             {{ else }}
-                <img src='{{ .Site.Params.avatar}}' class="avatar">
+                <!-- fixme check whether the default avatar path is url or not-->
+                <img src='{{ $.Site.BaseURL }}/{{ .Site.Params.avatar }}' class="avatar">
             {{ end }}
             <div class="intro">
                 {{ with .Params.name }}
