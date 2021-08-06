@@ -1,8 +1,20 @@
+{{ $logo_file := "default_link_logo.png" }}
+
+{{ if eq 1 (len (findRE `(https?://)?mp\.weixin\.qq\.com([-a-zA-Z0-9()@:%\+.~#?&/=_]*)` .a)) }}
+    {{ $logo_file = "wechat.png"}}
+{{ end }}
+
+
 <div class="share-link-block">
     <table class="link-table">
     <tr>
         <td>
-            <img src="{{ .baseurl }}\link-logos\default_link_logo.png" class="link-logo">
+            {{ $baseurl := .baseurl}}
+            {{ with .logo }}
+            <img src="{{ . }}" class="link-logo">
+            {{ else }}
+            <img src="{{ $baseurl }}/link-logos/{{ $logo_file }}" class="link-logo">
+            {{ end }}
         </td>
         <td style="padding-left: 20px">
             <a href="{{ .a }}">{{.word}}</a>
