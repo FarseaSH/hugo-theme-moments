@@ -4,6 +4,15 @@
     {{ $logo_file = "wechat.png"}}
 {{ end }}
 
+{{ if eq 1 (len (findRE `(https?://)?(www\.)?bilibili\.com/video/([-a-zA-Z0-9()@:%\+.~#?&/=_]*)` .a)) }}
+    {{ $logo_file = "bilibili.png"}}
+{{ end }}
+
+{{ if eq 1 (len (findRE `(https?://)?(www\.)?github\.com([-a-zA-Z0-9()@:%\+.~#?&/=_]*)` .a)) }}
+    {{ $logo_file = "github.png"}}
+{{ end }}
+
+<!-- todo add zhihu -->
 
 <div class="share-link-block">
     <table class="link-table">
