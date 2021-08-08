@@ -3,19 +3,13 @@
 
 name = "Moments"
 license = "MIT"
-licenselink = "https://github.com/yourname/yourtheme/blob/master/LICENSE"
+licenselink = "https://github.com/FarseaSH/hugo-theme-moments/blob/master/LICENSE"
 description = ""
-homepage = "http://example.com/"
+homepage = "https://github.com/FarseaSH/hugo-theme-moments"
 tags = []
 features = []
 min_version = "0.41"
 
 [author]
-  name = ""
-  homepage = ""
-
-# If porting an existing theme
-[original]
-  name = ""
-  homepage = ""
-  repo = ""
+  name = "FarseaSH"
+  homepage = "https://www.yyshao.com"
