@@ -1,6 +1,6 @@
 {{ define "main" }}
     <div class="container bodycontainer">
-        {{ $paginator := .Paginate ((where .Site.RegularPages "Section" "moments").ByParam "top").Reverse }}
+        {{ $paginator := .Paginate ((where .Site.RegularPages "Section" "moments").ByParam "top") }}
         {{ range $paginator.Pages }}
             {{ partial "row.html" . }}
         {{ end }}
@@ -9,7 +9,7 @@
 
 
 {{ define "pagination" }}
-    {{ $paginator := .Paginate ((where .Site.RegularPages "Section" "moments").ByParam "top").Reverse }}
+    {{ $paginator := .Paginate ((where .Site.RegularPages "Section" "moments").ByParam "top") }}
     {{ if $paginator.HasPrev }}
     <li class="page-item">
         <a class="page-link" href="{{$.Site.BaseURL}}/{{sub $paginator.PageNumber 1 }}" tabindex="-1">Previous</a>
