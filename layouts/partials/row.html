@@ -7,6 +7,13 @@
 
     <!-- 正文 -->
     <div class="col-sm-8">
+        <!-- 置顶标签 -->
+        {{ if gt .Params.top 0}}
+        <div class="top-mark" style="position: absolute; right: 5%;">
+            <i class="fas fa-bookmark" style="color: #e76b4f;"></i>
+        </div>
+        {{ end }}
+
         <!-- 抬头 -->
         <!-- 头像前面margin2px -->
         <div style="margin-top: 2px;">
