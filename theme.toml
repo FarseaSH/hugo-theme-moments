@@ -4,11 +4,11 @@
 name = "Moments"
 license = "MIT"
 licenselink = "https://github.com/FarseaSH/hugo-theme-moments/blob/master/LICENSE"
-description = ""
+description = "A Hugo theme for micro-blogging"
 homepage = "https://github.com/FarseaSH/hugo-theme-moments"
-tags = []
-features = []
-min_version = "0.41"
+tags = ["Responsive", "Gallery", "Micro-blogging"]
+features = ["Micro-blogging"]
+min_version = "0.85.0"
 
 [author]
   name = "FarseaSH"

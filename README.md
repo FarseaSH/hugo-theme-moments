@@ -8,7 +8,7 @@ Moments is a Hugo theme for short posts(similar to Twitter posts). It provides a
 
 ## Screenshot
 
-![demo](https://z3.ax1x.com/2021/08/08/flwRF1.png)
+![demo](https://z3.ax1x.com/2021/08/20/fjCS5F.png)
 
 ## Quick Start
 
