@@ -1,0 +1,41 @@
+{{ define "main" }}
+    <div class="container bodycontainer">
+        {{ $paginator := .Paginate ((where $.Site.RegularPages "Section" .Section ).ByParam "top") }}
+        {{ range $paginator.Pages }}
+            {{ partial "row.html" . }}
+        {{ end }}
+    </div>
+{{ end }}
+
+
+{{ define "pagination" }}
+    {{ $paginator := .Paginate ((where $.Site.RegularPages "Section" .Section ).ByParam "top") }}
+    {{ if $paginator.HasPrev }}
+    <li class="page-item">
+        <a class="page-link" href="{{$.Site.BaseURL}}/{{sub $paginator.PageNumber 1 }}" tabindex="-1">Previous</a>
+    </li>
+    {{ else }}
+    <li class="page-item disabled">
+        <a class="page-link" href="{{$.Site.BaseURL}}/{{sub $paginator.PageNumber 1 }}" tabindex="-1">Previous</a>
+    </li>
+    {{ end }}
+
+    {{ $current_num := $paginator.PageNumber }}
+    {{ range (seq 1 $paginator.TotalPages) }}
+        {{ if (eq $current_num .)}}
+            <li class="page-item active"><a class="page-link" href="{{$.Site.BaseURL}}/{{.}}">{{.}}</a></li>
+        {{ else }}
+            <li class="page-item"><a class="page-link" href="{{$.Site.BaseURL}}/{{.}}">{{.}}</a></li>
+        {{ end }}
+    {{end}}
+
+    {{ if $paginator.HasNext }}
+    <li class="page-item">
+        <a class="page-link" href="{{$.Site.BaseURL}}/{{ add $paginator.PageNumber 1 }}">Next</a>
+    </li>
+    {{ else }}
+    <li class="page-item disabled">
+        <a class="page-link" href="{{$.Site.BaseURL}}/{{ add $paginator.PageNumber 1 }}">Next</a>
+    </li>
+    {{ end }}
+{{ end }}
