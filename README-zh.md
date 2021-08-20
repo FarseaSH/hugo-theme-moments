@@ -1,7 +1,8 @@
-<h1 align=center>Hugo 主题 Moments | <a href="https://farseash.github.io/demo-hugo-theme-moments/">Demo</a></h1>
+<h1 align=center>Hugo 主题 Moments | <a href="https://farseash.github.io/demo-hugo-theme-moments/moments-zh">Demo</a></h1>
 
 </br>
 
+[English](README.md)
 
 Moments是一款Hugo主题，用于短文发布，它为你提供了一个兼具社交性与私密性的记录分享空间。
 
@@ -82,7 +83,7 @@ hugo new moments/your_moments_name.md
 
 #### 纯文字
 
-[![fNGzbF.png](https://z3.ax1x.com/2021/08/11/fNGzbF.png)](https://imgtu.com/i/fNGzbF)
+![fNGzbF.png](https://z3.ax1x.com/2021/08/11/fNGzbF.png)
 
 ```
 ---
@@ -139,7 +140,7 @@ note: 这是加入图片的moment
 
 #### 图片集
 
-[![fNt5DK.png](https://z3.ax1x.com/2021/08/11/fNt5DK.png)](https://imgtu.com/i/fNt5DK)
+![fNt5DK.png](https://z3.ax1x.com/2021/08/11/fNt5DK.png
 
 ```
 ---
@@ -173,7 +174,7 @@ note: 这是附带图片集的moment
 
 #### 网页链接
 
-[![fNNF8s.png](https://z3.ax1x.com/2021/08/11/fNNF8s.png)](https://imgtu.com/i/fNNF8s)
+![fNNF8s.png](https://z3.ax1x.com/2021/08/11/fNNF8s.png)
 
 ```
 ---
