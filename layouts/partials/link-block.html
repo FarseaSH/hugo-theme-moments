@@ -12,7 +12,13 @@
     {{ $logo_file = "github.png"}}
 {{ end }}
 
-<!-- todo add zhihu -->
+{{ if eq 1 (len (findRE `(https?://)?(www\.)?zhihu\.com/question/([0-9]*)/answer/[0-9]*` .a)) }}
+    {{ $logo_file = "zhihu.svg"}}
+{{ end }}
+
+{{ if eq 1 (len (findRE `(https?://)?zhuanlan\.zhihu\.com/p/([0-9]*)` .a)) }}
+    {{ $logo_file = "zhihu.svg"}}
+{{ end }}
 
 <div class="share-link-block">
     <table class="link-table">
