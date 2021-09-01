@@ -2,6 +2,13 @@
 body{
     background-color: #f5f5f5;
 }
+
+.jumbotron{
+    padding-top: 64px;
+    padding-bottom: 64px;
+    margin-bottom: 32px;
+}
+
 .page{
     max-width: 1150px;
     margin: auto;
@@ -19,9 +26,10 @@ body{
     margin: auto;
 }
 
-.moment-content{
+.moment-content {
     position: relative;
 }
+
 /* 时间 */
 .time{
     text-align: right;
@@ -41,6 +49,11 @@ body{
 }
 
 /* 抬头 */
+
+.user-info{
+    display: flex;
+}
+
 .avatar{
     max-height: 45px;
     float: left;
@@ -56,6 +69,7 @@ body{
     color:#186D9C!important;
     margin-bottom: 0;
     line-height: 1.1;
+    font-size: 24px;
 }
 
 .tag::before{
@@ -65,6 +79,7 @@ body{
     font-size: 80%;
     margin-left: 0px;
     margin-right: 10px;
+    color: #6c757d!important;
 }
 
 /* 正文 */
@@ -125,11 +140,31 @@ body{
 }
 
 /* 附注信息 */
-.note{
+.moment-note{
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: space-between;
+}
+
+.moment-note .note{
     font-size: 80%;
     text-indent: 20px;
-    float: left;
-    margin-bottom: 10px;
+    color: rgb(0, 0, 0, 0.5);
+
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.moment-note{
+    margin-right: 5px; 
+    color:#808080
+}
+
+/* hr */
+hr {
+    border-width: 0;
+    border-top: 1px solid;
+    border-color: rgb(0, 0, 0, 0.1);
 }
 
 /* footer底注 */

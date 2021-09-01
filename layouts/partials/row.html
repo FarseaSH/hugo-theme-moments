@@ -4,9 +4,9 @@
         <!-- 时间 -->
         <div class="pure-u-1 pure-u-sm-1-3">
             <div class="time">
-                <h2>{{ .Date.Format "Jan 2"}}{{ if in (slice 1 21 31) .Date.Day}}st{{ else if in (slice 2 22)
-                    .Date.Day}}nd{{ else if in (slice 3 23) .Date.Day}}rd{{ else }}th{{ end }}</h2>
-                <h4>{{ .Date.Format "2006"}}</h4>
+                <div class="month-day">{{ .Date.Format "Jan 2"}}{{ if in (slice 1 21 31) .Date.Day}}st{{ else if in (slice 2 22)
+                    .Date.Day}}nd{{ else if in (slice 3 23) .Date.Day}}rd{{ else }}th{{ end }}</div>
+                <div class="year">{{ .Date.Format "2006"}}</div>
             </div>
         </div>
 
@@ -22,18 +22,20 @@
 
                 <!-- 抬头 -->
                 <!-- 头像前面margin2px -->
-                <div style="margin-top: 2px;">
-                    {{ with .Params.avatar }}
-                    <img src='{{ . }}' class="avatar">
-                    {{ else }}
-                    <!-- fixme check whether the default avatar path is url or not-->
-                    <img src='{{ $.Site.BaseURL }}/{{ .Site.Params.avatar }}' class="avatar">
-                    {{ end }}
+                <div style="margin-top: 2px;" class="user-info">
+                    <div class="avatar-block">
+                        {{ with .Params.avatar }}
+                        <img src='{{ . }}' class="avatar">
+                        {{ else }}
+                        <!-- fixme check whether the default avatar path is url or not-->
+                        <img src='{{ $.Site.BaseURL }}/{{ .Site.Params.avatar }}' class="avatar">
+                        {{ end }}
+                    </div>
                     <div class="intro">
                         {{ with .Params.name }}
-                        <h4 class="text-primary name">{{ . }}</h4>
+                        <div class="name">{{ . }}</div>
                         {{ else }}
-                        <h4 class="text-primary name">{{ .Site.Params.name }}</h4>
+                        <div class="name">{{ .Site.Params.name }}</div>
                         {{ end }}
                         <div>
                             {{ $tags_filtered := slice}}
@@ -88,11 +90,9 @@
                     {{ end }}
 
                     <!-- 附注信息 -->
-                    <div>
-                        <p class="text-black-50 note">
-                            {{ .Date.Format "15:04" }} {{ .Params.note }}
-                        </p>
-                        <i class="far fa-heart" style="float: right; margin-right: 5px; color:#808080"></i>
+                    <div class="moment-note">
+                        <p class="note">{{ .Date.Format "15:04" }} {{ .Params.note }}</p>
+                        <div style="padding-right: 12px;"><i class="far fa-heart"></i></div>
                     </div>
                 </div>
                 <!-- 分隔线 -->
