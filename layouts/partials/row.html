@@ -1,94 +1,106 @@
-<div class="row">
-    <!-- 时间 -->
-    <div class="col-sm-4 time">
-        <h2>{{ .Date.Format "Jan 2"}}{{ if in (slice 1 21 31) .Date.Day}}st{{ else if in (slice 2 22) .Date.Day}}nd{{ else if in (slice 3 23) .Date.Day}}rd{{ else }}th{{ end }}</h2>
-        <h4>{{ .Date.Format "2006"}}</h4>
-    </div>
+<div class="moment-row">
 
-    <!-- 正文 -->
-    <div class="col-sm-8">
-        <!-- 置顶标签 -->
-        {{ if gt .Params.top 0}}
-        <div class="top-mark" style="position: absolute; right: 5%;">
-            <i class="fas fa-bookmark" style="color: #e76b4f;"></i>
+    <div class="pure-g">
+        <!-- 时间 -->
+        <!-- <div class="pure-u-1 pure-u-sm-1-3"> -->
+        <div class="pure-u-1-3">
+            <div class="time">
+                <h2>{{ .Date.Format "Jan 2"}}{{ if in (slice 1 21 31) .Date.Day}}st{{ else if in (slice 2 22)
+                    .Date.Day}}nd{{ else if in (slice 3 23) .Date.Day}}rd{{ else }}th{{ end }}</h2>
+                <h4>{{ .Date.Format "2006"}}</h4>
+            </div>
         </div>
-        {{ end }}
 
-        <!-- 抬头 -->
-        <!-- 头像前面margin2px -->
-        <div style="margin-top: 2px;">
-            {{ with .Params.avatar }}
-                <img src='{{ . }}' class="avatar">
-            {{ else }}
-                <!-- fixme check whether the default avatar path is url or not-->
-                <img src='{{ $.Site.BaseURL }}/{{ .Site.Params.avatar }}' class="avatar">
-            {{ end }}
-            <div class="intro">
-                {{ with .Params.name }}
-                    <h4 class="text-primary name">{{ . }}</h4>
-                {{ else }}
-                    <h4 class="text-primary name">{{ .Site.Params.name }}</h4>
-                {{ end }}
-                <div>
-                    {{ $tags_filtered := slice}}
-                    {{ with .Params.tags }}
-                        {{ range . }}
-                            {{ with .}}
-                                {{ $tags_filtered = $tags_filtered | append . }}
-                            {{ end }}
-                        {{ end }}
-                    {{ end }}
-                    {{ with $tags_filtered }}
-                    {{ range . }}<span class="tag text-muted">{{ . }}</span>{{ end }}
-                    {{ end }}
+        <!-- 正文 -->
+        <!-- <div class="pure-u-1 pure-u-sm-1-3"> -->
+        <div class="pure-u-2-3">
+            <div class="moment-content">
+                <!-- 置顶标签 -->
+                {{ if gt .Params.top 0}}
+                <div class="top-mark" style="position: absolute; right: 5%;">
+                    <i class="fas fa-bookmark" style="color: #e76b4f;"></i>
                 </div>
-            </div>
-        </div>
-        <!-- 抬头后面内容右平移5px，与头像兼容显得自然 -->
-        <div style="padding-left: 5px; padding-right: 5px;">
-            <!-- 文字 -->
-            <div class="context">
-                {{ .Content }}    
-            </div>
-
-            <!-- 图片 -->
-            {{ with .Params.pic }}
-                <img src="{{ . }}" class="img-fluid pic1" alt="Responsive image" data-fancybox="gallery"></img>
-            {{ end }}
-
-            <!-- 图片集  -->
-            {{ $pic_set_filtered := slice}}
-            {{ with .Params.pic_set }}
-                {{ range . }}
-                    {{ with .}}
-                        {{ $pic_set_filtered = $pic_set_filtered | append . }}
-                    {{ end }}
                 {{ end }}
-            {{ end }}
-            
-            {{ with $pic_set_filtered }}
-                {{ partial "pic_set.html" (dict "pic_set" .) }}
-            {{ end }}
-            
-            <!-- todo format the name of this part -->
-            <!-- add-on info 3: link -->
-            {{ $link_link := .Params.link }}
-            {{ $link_logo := .Params.link_logo }}
-            {{ $link_text := .Params.link_text }}
-            
-            {{ with .Params.link }}
-                {{ partial "link-block.html" (dict "logo" $link_logo "a" $link_link "word" $link_text "baseurl" $.Site.BaseURL)}}
-            {{ end }}
 
-            <!-- 附注信息 -->
-            <div>
-                <p class="text-black-50 note">
-                    {{ .Date.Format "15:04" }} {{ .Params.note }}
-                </p>
-                <i class="far fa-heart" style="float: right; margin-right: 5px; color:#808080"></i>
+                <!-- 抬头 -->
+                <!-- 头像前面margin2px -->
+                <div style="margin-top: 2px;">
+                    {{ with .Params.avatar }}
+                    <img src='{{ . }}' class="avatar">
+                    {{ else }}
+                    <!-- fixme check whether the default avatar path is url or not-->
+                    <img src='{{ $.Site.BaseURL }}/{{ .Site.Params.avatar }}' class="avatar">
+                    {{ end }}
+                    <div class="intro">
+                        {{ with .Params.name }}
+                        <h4 class="text-primary name">{{ . }}</h4>
+                        {{ else }}
+                        <h4 class="text-primary name">{{ .Site.Params.name }}</h4>
+                        {{ end }}
+                        <div>
+                            {{ $tags_filtered := slice}}
+                            {{ with .Params.tags }}
+                            {{ range . }}
+                            {{ with .}}
+                            {{ $tags_filtered = $tags_filtered | append . }}
+                            {{ end }}
+                            {{ end }}
+                            {{ end }}
+                            {{ with $tags_filtered }}
+                            {{ range . }}<span class="tag text-muted">{{ . }}</span>{{ end }}
+                            {{ end }}
+                        </div>
+                    </div>
+                </div>
+                <!-- 抬头后面内容右平移5px，与头像兼容显得自然 -->
+                <div style="padding-left: 5px; padding-right: 5px;">
+                    <!-- 文字 -->
+                    <div class="context">
+                        {{ .Content }}
+                    </div>
+
+                    <!-- 图片 -->
+                    {{ with .Params.pic }}
+                    <img src="{{ . }}" class="img-fluid pic1" alt="Responsive image" data-fancybox="gallery"></img>
+                    {{ end }}
+
+                    <!-- 图片集  -->
+                    {{ $pic_set_filtered := slice}}
+                    {{ with .Params.pic_set }}
+                    {{ range . }}
+                    {{ with .}}
+                    {{ $pic_set_filtered = $pic_set_filtered | append . }}
+                    {{ end }}
+                    {{ end }}
+                    {{ end }}
+
+                    {{ with $pic_set_filtered }}
+                    {{ partial "pic_set.html" (dict "pic_set" .) }}
+                    {{ end }}
+
+                    <!-- todo format the name of this part -->
+                    <!-- add-on info 3: link -->
+                    {{ $link_link := .Params.link }}
+                    {{ $link_logo := .Params.link_logo }}
+                    {{ $link_text := .Params.link_text }}
+
+                    {{ with .Params.link }}
+                    {{ partial "link-block.html" (dict "logo" $link_logo "a" $link_link "word" $link_text "baseurl"
+                    $.Site.BaseURL)}}
+                    {{ end }}
+
+                    <!-- 附注信息 -->
+                    <div>
+                        <p class="text-black-50 note">
+                            {{ .Date.Format "15:04" }} {{ .Params.note }}
+                        </p>
+                        <i class="far fa-heart" style="float: right; margin-right: 5px; color:#808080"></i>
+                    </div>
+                </div>
+                <!-- 分隔线 -->
+                <hr style="clear: both">
             </div>
         </div>
-        <!-- 分隔线 -->
-        <hr style="clear: both">
     </div>
+
 </div>

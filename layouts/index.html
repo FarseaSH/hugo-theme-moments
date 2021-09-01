@@ -1,5 +1,5 @@
 {{ define "main" }}
-    <div class="container bodycontainer">
+    <div class="container">
         {{ $paginator := .Paginate ((where .Site.RegularPages "Section" "moments").ByParam "top") }}
         {{ range $paginator.Pages }}
             {{ partial "row.html" . }}
