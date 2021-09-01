@@ -2,8 +2,7 @@
 
     <div class="pure-g">
         <!-- 时间 -->
-        <!-- <div class="pure-u-1 pure-u-sm-1-3"> -->
-        <div class="pure-u-1-3">
+        <div class="pure-u-1 pure-u-sm-1-3">
             <div class="time">
                 <h2>{{ .Date.Format "Jan 2"}}{{ if in (slice 1 21 31) .Date.Day}}st{{ else if in (slice 2 22)
                     .Date.Day}}nd{{ else if in (slice 3 23) .Date.Day}}rd{{ else }}th{{ end }}</h2>
@@ -12,8 +11,7 @@
         </div>
 
         <!-- 正文 -->
-        <!-- <div class="pure-u-1 pure-u-sm-1-3"> -->
-        <div class="pure-u-2-3">
+        <div class="pure-u-1 pure-u-sm-2-3">
             <div class="moment-content">
                 <!-- 置顶标签 -->
                 {{ if gt .Params.top 0}}
