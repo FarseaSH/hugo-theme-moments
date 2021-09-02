@@ -152,7 +152,8 @@ p{
 }
 
 .tag::before{
-    content:"#"
+    content:"#";
+    padding-right: 1px;
 }
 .tag{
     font-size: 80%;
