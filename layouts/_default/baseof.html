@@ -11,12 +11,12 @@
             {{ end }}
         
             <!-- Pagination -->
-            <nav aria-label="Page navigation .pagination-lg">
-                <ul class="pagination justify-content-center">
+            <div class="center">
+                <div class="pagination">
                     {{ block "pagination" . }}
                     {{ end }}
-                </ul>
-            </nav>
+                </div>
+            </div>
 
             {{ partial "footer.html" . }}
         </div>
