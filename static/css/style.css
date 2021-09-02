@@ -169,8 +169,8 @@ p{
 }
 
 /* 图片 */
-.pic1{
-    max-width: 80%; 
+.single-pic{
+    max-width: 65%; 
     max-height: 250px;
     padding-bottom:10px;
     margin-top: 5px; 

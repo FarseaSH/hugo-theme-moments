@@ -1,7 +1,7 @@
 <div class="moment-row">
 
     <div class="pure-g">
-        <!-- 时间 -->
+        <!-- time -->
         <div class="pure-u-1 pure-u-sm-1-3">
             <div class="time">
                 <div class="month-day">{{ .Date.Format "Jan 2"}}{{ if in (slice 1 21 31) .Date.Day}}st{{ else if in (slice 2 22)
@@ -10,17 +10,17 @@
             </div>
         </div>
 
-        <!-- 正文 -->
+        <!-- moment-content -->
         <div class="pure-u-1 pure-u-sm-2-3">
             <div class="moment-content">
-                <!-- 置顶标签 -->
+                <!-- top mark -->
                 {{ if gt .Params.top 0}}
                 <div class="top-mark" style="position: absolute; right: 5%;">
                     <i class="fas fa-bookmark" style="color: #e76b4f;"></i>
                 </div>
                 {{ end }}
 
-                <!-- 抬头 -->
+                <!-- user info -->
                 <div class="user-info">
                     <div class="avatar-block">
                         {{ with .Params.avatar }}
@@ -39,46 +39,65 @@
                         <div>
                             {{ $tags_filtered := slice}}
                             {{ with .Params.tags }}
-                            {{ range . }}
-                            {{ with .}}
-                            {{ $tags_filtered = $tags_filtered | append . }}
-                            {{ end }}
-                            {{ end }}
+                                {{ range . }}
+                                    {{ with .}}
+                                    {{ $tags_filtered = $tags_filtered | append . }}
+                                    {{ end }}
+                                {{ end }}
                             {{ end }}
                             {{ with $tags_filtered }}
-                            {{ range . }}<span class="tag text-muted">{{ . }}</span>{{ end }}
+                                {{ range . }}<span class="tag text-muted">{{ . }}</span>{{ end }}
                             {{ end }}
                         </div>
                     </div>
                 </div>
-                <!-- 抬头后面内容右平移5px，与头像兼容显得自然 -->
                 <div style="padding-left: 5px; padding-right: 5px;">
-                    <!-- 文字 -->
+                    <!-- content -->
                     <div class="context">
                         {{ .Content }}
                     </div>
-
-                    <!-- 图片 -->
+                    
+                    <!-- add-on info 1: pictures -->
+                    <!-- single picture (old version)-->
                     {{ with .Params.pic }}
-                    <img src="{{ . }}" class="img-fluid pic1" alt="Responsive image" data-fancybox="gallery"></img>
+                        <img src="{{ . }}" class="single-pic" alt="Responsive image" data-fancybox="gallery"></img>
                     {{ end }}
 
-                    <!-- 图片集  -->
+                    <!-- multiple pictures (old version) -->
                     {{ $pic_set_filtered := slice}}
                     {{ with .Params.pic_set }}
-                    {{ range . }}
-                    {{ with .}}
-                    {{ $pic_set_filtered = $pic_set_filtered | append . }}
-                    {{ end }}
-                    {{ end }}
+                        {{ range . }}
+                            {{ with . }}
+                            {{ $pic_set_filtered = $pic_set_filtered | append . }}
+                            {{ end }}
+                        {{ end }}
                     {{ end }}
 
                     {{ with $pic_set_filtered }}
                     {{ partial "pic_set.html" (dict "pic_set" .) }}
                     {{ end }}
 
-                    <!-- todo format the name of this part -->
-                    <!-- add-on info 3: link -->
+                    <!-- new pictures API (combine single & multiple pictures)-->
+                    {{ $pictures_set:= slice}}
+                    {{ with .Params.pictures }}
+                        {{ range . }}
+                            {{ with . }}
+                                {{ $pictures_set = $pictures_set | append . }}
+                            {{ end }}
+                        {{ end }}
+                    {{ end }}
+
+                    {{ if (eq (len $pictures_set) 1) }}
+                        {{ range $pictures_set }}
+                            <img src="{{ . }}" class="single-pic" alt="Responsive image" data-fancybox="gallery"></img>
+                        {{ end }}
+                    {{ end }}
+
+                    {{ if (gt (len $pictures_set) 1)}}
+                        {{ partial "pic_set.html" (dict "pic_set" $pictures_set) }}
+                    {{ end }}
+
+                    <!-- add-on info 2: link -->
                     {{ $link_link := .Params.link }}
                     {{ $link_logo := .Params.link_logo }}
                     {{ $link_text := .Params.link_text }}
@@ -88,13 +107,12 @@
                     $.Site.BaseURL)}}
                     {{ end }}
 
-                    <!-- 附注信息 -->
+                    <!-- Note info -->
                     <div class="moment-note">
                         <p class="note">{{ .Date.Format "15:04" }} {{ .Params.note }}</p>
                         <div style="padding-right: 12px;"><i class="far fa-heart"></i></div>
                     </div>
                 </div>
-                <!-- 分隔线 -->
                 <hr style="clear: both">
             </div>
         </div>
