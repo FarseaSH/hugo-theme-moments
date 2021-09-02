@@ -18,6 +18,11 @@ p{
 /* START - top cover part */
 .jumbotron{
     padding-top: 64px;
+    background-position: center;
+    background-size: cover; 
+    min-height: 200px; 
+    text-align: center;
+    margin-bottom: 30px;
 }
 
 .site-title{
@@ -169,8 +174,8 @@ p{
 }
 
 /* 图片 */
-.pic1{
-    max-width: 80%; 
+.single-pic{
+    max-width: 65%; 
     max-height: 250px;
     padding-bottom:10px;
     margin-top: 5px; 
