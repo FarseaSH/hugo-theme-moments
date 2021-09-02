@@ -14,11 +14,25 @@ p{
     margin-top: 0;
 }
 
+/* START - top cover part */
 .jumbotron{
     padding-top: 64px;
-    padding-bottom: 64px;
-    margin-bottom: 32px;
 }
+
+.site-title{
+    color: rgb(108, 117, 125);
+    font-size: 56px;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+
+.signature{
+    color: rgb(0, 0, 0, 0.5);
+    font-size: 20px;
+    font-weight: 300;
+}
+
+/* END - top cover part */
 
 .page{
     max-width: 1150px;
