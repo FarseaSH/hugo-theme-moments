@@ -8,6 +8,7 @@ body{
     font-weight: normal;
     font-size: 16px;
     line-height: 24px;
+    color: rgb(33, 37, 41);
 }
 
 p{
@@ -55,11 +56,12 @@ p{
     position: relative;
 }
 
-/* 时间 */
+/* START - time */
 .time{
     text-align: right;
     padding-right: 60px;
     /* white-space: nowrap; */
+    font-weight: 300;
 }
 @media (max-width: 576px){
     .time{
@@ -72,6 +74,15 @@ p{
         padding-right: 20px;
     }
 }
+.time .month-day{
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+.time .year{
+    font-size: 16px;
+}
+
+/* END - time */
 
 /* 抬头 */
 
