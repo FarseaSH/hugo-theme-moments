@@ -2,6 +2,87 @@
 body{
     background-color: #f5f5f5;
 }
+
+.pure-g [class*=pure-u]{
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !important;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: rgb(33, 37, 41);
+}
+
+p{
+    margin-top: 0;
+}
+
+/* START - top cover part */
+.jumbotron{
+    padding-top: 64px;
+    background-position: center;
+    background-size: cover; 
+    min-height: 200px; 
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.site-title{
+    color: rgb(108, 117, 125);
+    font-size: 56px;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+
+.signature{
+    color: rgb(0, 0, 0, 0.5);
+    font-size: 20px;
+    font-weight: 300;
+}
+
+/* END - top cover part */
+
+/* START - pagination */
+.center{
+    display: flex;
+    justify-content: center;
+}
+
+.pagination{
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.pagination a{
+    color: #337cf6;
+    text-decoration: none;
+}
+
+.page-item{
+    border: #80808050;
+    border-style: solid;
+    border-width: 0.5px;
+    border-radius: 2%;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.page-link .page-item:hover{
+    background-color: #eaecef;
+    color: #2157ad;
+}
+
+.page-item.active{
+    background-color: #337cf6;
+    color: #ffffff;
+}
+
+.page-item.disabled{
+    color:rgb(108, 117, 125)
+}
+/* END - pagination */
+
 .page{
     max-width: 1150px;
     margin: auto;
@@ -14,16 +95,33 @@ body{
     }
 }
 
-.bodycontainer{
+.container{
     max-width: 760px;
-    /* padding-right: 80px; */
+    margin: auto;
 }
 
-/* 时间 */
+.moment-content {
+    position: relative;
+}
+
+@media (max-width: 720px) {
+    .moment-row{
+        margin-bottom: 20px;
+    }
+
+    .container{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+    
+/* START - time */
 .time{
     text-align: right;
     padding-right: 60px;
     /* white-space: nowrap; */
+    font-weight: 300;
+    margin-bottom: 20px;
 }
 @media (max-width: 576px){
     .time{
@@ -36,8 +134,22 @@ body{
         padding-right: 20px;
     }
 }
+.time .month-day{
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+.time .year{
+    font-size: 16px;
+}
+
+/* END - time */
 
 /* 抬头 */
+
+.user-info{
+    display: flex;
+}
+
 .avatar{
     max-height: 45px;
     float: left;
@@ -53,15 +165,18 @@ body{
     color:#186D9C!important;
     margin-bottom: 0;
     line-height: 1.1;
+    font-size: 24px;
 }
 
 .tag::before{
-    content:"#"
+    content:"#";
+    padding-right: 1px;
 }
 .tag{
     font-size: 80%;
     margin-left: 0px;
     margin-right: 10px;
+    color: #6c757d!important;
 }
 
 /* 正文 */
@@ -71,21 +186,34 @@ body{
 }
 
 /* 图片 */
-.pic1{
-    max-width: 80%; 
+.single-pic{
+    max-width: 65%; 
     max-height: 250px;
     padding-bottom:10px;
     margin-top: 5px; 
 }
 /* 图片集 */
-#carouselExampleIndicators{
-    width: 80%; 
-    padding-bottom:10px;
-    margin-top: 5px;
+.pic-grid{
+    max-width: 80%;
 }
 
-.pic-in-set{
-    height: 250px;
+.pic-grid .img-container{
+    padding-top: 50%;
+    padding-bottom: 50%;
+    position: relative;
+    height: 0px;
+}
+
+.pic-grid img{
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0
+}
+
+.pic-grid .add-padding{
+    padding: 2.5px;
 }
 
 /* 内容附带的超链接 */
@@ -106,29 +234,49 @@ body{
 .share-link-block a{
     color:#17a2b8;
     word-wrap: break-word;
+    text-decoration: none;
 }
 
 /* 附注信息 */
-.note{
+.moment-note{
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: space-between;
+}
+
+.moment-note .note{
     font-size: 80%;
     text-indent: 20px;
-    float: left;
-    margin-bottom: 10px;
+    color: rgb(0, 0, 0, 0.5);
+
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.moment-note{
+    margin-right: 5px; 
+    color:#808080
+}
+
+/* hr */
+hr {
+    border-width: 0;
+    border-top: 1px solid;
+    border-color: rgb(0, 0, 0, 0.1);
 }
 
 /* footer底注 */
 .footer {
+    padding-top: 20px;
+    padding-bottom: 30px;
     background-color: #f5f5f5;
+    
+    color: #6c757d !important;
     text-align: center;
     font-size: 95%;
 }
-.footcontainer {
-    width: auto;
-    padding-right: 15px;
-    padding-left: 15px;
-}
 
-.footcontainer a{ 
+.footer a{ 
     text-decoration: underline !important; 
     color:#6c757d !important;
 } 
