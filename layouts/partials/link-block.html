@@ -1,3 +1,4 @@
+{{ $resource_type := "link" }}
 {{ $logo_file := "default_link_logo.png" }}
 
 {{ if eq 1 (len (findRE `(https?://)?mp\.weixin\.qq\.com([-a-zA-Z0-9()@:%\+.~#?&/=_]*)` .a)) }}
@@ -20,6 +21,20 @@
     {{ $logo_file = "zhihu.svg"}}
 {{ end }}
 
+{{ $netease_music_song_id := "0" }}
+{{ if eq 1 (len (findRE `(https?://)?music\.163\.com/song\?id=([0-9]*)([-a-zA-Z0-9()@:%\+.~#?&/=_]*)` .a)) }}
+    {{ $resource_type = "netease_music" }}
+    {{ $netease_music_song_id = replaceRE `(https?://)?music\.163\.com/song\?id=([0-9]*)([-a-zA-Z0-9()@:%\+.~#?&/=_]*)` "$2" .a }}
+{{ end }}
+
+{{ if eq "netease_music" $resource_type}}
+<iframe 
+    frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 class="netease_music_player"
+    src="//music.163.com/outchain/player?type=2&id={{ $netease_music_song_id }}&auto=1&height=66">
+</iframe>
+{{ end }}
+
+{{ if eq "link" $resource_type }}
 <div class="share-link-block">
     <table class="link-table">
     <tr>
@@ -37,3 +52,4 @@
     </tr>
     </table>
 </div>
+{{ end }}
