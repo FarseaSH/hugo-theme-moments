@@ -41,9 +41,11 @@
 <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/grids-min.css">
 <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/grids-responsive-min.css">
 
-<!-- pangu support (js in the end before the body closing tag) -->
-<!-- todo make it optional -->
+{{/* pangu support: js in the end before the body closing tag */}}
+{{ if .Site.Params.features.pangu }}
+<!-- pangu support -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js"></script>
+{{ end }}
 
 <!-- website title -->
 <title>{{ .Site.Params.title }}</title>
