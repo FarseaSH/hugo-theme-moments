@@ -1,39 +1,45 @@
+{{/* BEGIN parse the input parameter */}}
+{{/* PART 1 default link */}}
 {{ $resource_type := "link" }}
+
 {{ $logo_file := "default_link_logo.png" }}
 
+{{/* 1.1 Wechat articles */}}
 {{ if eq 1 (len (findRE `(https?://)?mp\.weixin\.qq\.com([-a-zA-Z0-9()@:%\+.~#?&/=_]*)` .a)) }}
     {{ $logo_file = "wechat.png"}}
 {{ end }}
 
+{{/* 1.2 Bilibili webpage */}}
 {{ if eq 1 (len (findRE `(https?://)?(www\.)?bilibili\.com/video/([-a-zA-Z0-9()@:%\+.~#?&/=_]*)` .a)) }}
     {{ $logo_file = "bilibili.png"}}
 {{ end }}
 
+{{/* 1.3 github repo */}}
 {{ if eq 1 (len (findRE `(https?://)?(www\.)?github\.com([-a-zA-Z0-9()@:%\+.~#?&/=_]*)` .a)) }}
     {{ $logo_file = "github.png"}}
 {{ end }}
 
+{{/* 1.4.1 zhihu answers */}}
 {{ if eq 1 (len (findRE `(https?://)?(www\.)?zhihu\.com/question/([0-9]*)/answer/[0-9]*` .a)) }}
     {{ $logo_file = "zhihu.svg"}}
 {{ end }}
 
+{{/* 1.4.2 zhihu articles */}}
 {{ if eq 1 (len (findRE `(https?://)?zhuanlan\.zhihu\.com/p/([0-9]*)` .a)) }}
     {{ $logo_file = "zhihu.svg"}}
 {{ end }}
 
+{{/* PART 2 other link type */}}
+{{/* 2.1 netease music */}}
 {{ $netease_music_song_id := "0" }}
 {{ if eq 1 (len (findRE `(https?://)?music\.163\.com/song\?id=([0-9]*)([-a-zA-Z0-9()@:%\+.~#?&/=_]*)` .a)) }}
     {{ $resource_type = "netease_music" }}
     {{ $netease_music_song_id = replaceRE `(https?://)?music\.163\.com/song\?id=([0-9]*)([-a-zA-Z0-9()@:%\+.~#?&/=_]*)` "$2" .a }}
 {{ end }}
 
-{{ if eq "netease_music" $resource_type}}
-<iframe 
-    frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 class="netease_music_player"
-    src="//music.163.com/outchain/player?type=2&id={{ $netease_music_song_id }}&auto=1&height=66">
-</iframe>
-{{ end }}
 
+{{/* BEGIN generate output */}}
+{{/* PART 1 default link */}}
 {{ if eq "link" $resource_type }}
 <div class="share-link-block">
     <table class="link-table">
@@ -52,4 +58,12 @@
     </tr>
     </table>
 </div>
+{{ end }}
+
+{{/* PART 2 other link type */}}
+{{ if eq "netease_music" $resource_type}}
+<iframe 
+    frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 class="netease_music_player"
+    src="//music.163.com/outchain/player?type=2&id={{ $netease_music_song_id }}&auto=1&height=66">
+</iframe>
 {{ end }}
