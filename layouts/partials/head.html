@@ -31,7 +31,7 @@
 <meta name="theme-color" content="#ffffff">
 
 <!-- the Moments style css file -->
-<link rel="stylesheet" type="text/css" href="{{.Site.BaseURL}}/css/style.css">
+{{ $style := resources.Get "style-refractored.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
 
 <!-- fancybox css (js in the end before the body closing tag) -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"/>
