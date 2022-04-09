@@ -93,8 +93,13 @@
                         {{ end }}
                     {{ end }}
 
+                    {{ $test := "test" }}
                     {{ if (gt (len $pictures_set) 1)}}
-                        {{ partial "pic_set.html" (dict "pic_set" $pictures_set) }}
+                        {{/* partial "pic_set.html" (dict "pic_set" $pictures_set "other" $.Site.BaseURL) */}}
+                        {{ partial "pic_set.html" (dict "pic_set" $pictures_set "other" $.Site.BaseURL) }}
+                        {{ $test }}
+                        {{ partial "pic_set.html" (dict "pic_set" $pictures_set "other" $.Site.BaseURL) }}
+                        {{/* partial "pic_set.html" $pictures_set "other" */}}
                     {{ end }}
 
                     <!-- add-on info 2: link -->
