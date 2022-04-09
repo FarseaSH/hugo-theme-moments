@@ -28,10 +28,13 @@ body{
     margin: auto;
 }
 
-.moment-content {
+.moment-content{
     position: relative;
 }
 
+.moment-row{
+    margin-bottom: 20px;
+}
 
 @media (min-width:1150px) {
     .page{
@@ -71,7 +74,7 @@ p{
     }
     
     .signature{
-        color: rgb(0, 0, 0, 0.5);
+        color: rgba(0, 0, 0, 0.5);
         font-size: 20px;
         font-weight: 300;
     }
@@ -258,7 +261,7 @@ p{
     .note{
         font-size: 80%;
         text-indent: 20px;
-        color: rgb(0, 0, 0, 0.5);
+        color: rgba(0, 0, 0, 0.5);
     
         margin-top: 0;
         margin-bottom: 0;
@@ -267,9 +270,12 @@ p{
 
 // hr 
 hr {
+    margin-top: 20px;
     border-width: 0;
     border-top: 1px solid;
-    border-color: rgb(0, 0, 0, 0.1);
+    border-color: rgba(0, 0, 0, 0.1);
+    max-width: 75%;
+    clear: both
 }
 /* END - for the main content */
 
