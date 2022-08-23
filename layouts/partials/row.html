@@ -1,7 +1,8 @@
 <div class="moment-row">
 
     <div class="pure-g">
-        <!-- time -->
+
+        {{/* time info shown in the left (or above in small screens) */}}
         <div class="pure-u-1 pure-u-sm-1-3">
             <div class="time">
                 <div class="month-day">{{ .Date.Format "Jan 2"}}{{ if in (slice 1 21 31) .Date.Day}}st{{ else if in (slice 2 22)
@@ -10,23 +11,23 @@
             </div>
         </div>
 
-        <!-- moment-content -->
+        {{/* moment-main-content */}}
         <div class="pure-u-1 pure-u-sm-2-3">
             <div class="moment-content">
-                <!-- top mark -->
+                {{/* top mark */}}
                 {{ if gt .Params.top 0}}
                 <div class="top-mark" style="position: absolute; right: 5%;">
                     <i class="fas fa-bookmark" style="color: #e76b4f;"></i>
                 </div>
                 {{ end }}
 
-                <!-- user info -->
+                {{/* user info */}}
                 <div class="user-info">
                     <div class="avatar-block">
                         {{ with .Params.avatar }}
                         <img src='{{ . }}' class="avatar">
                         {{ else }}
-                        <!-- fixme check whether the default avatar path is url or not-->
+                        {{/* fixme check whether the default avatar path is url or not--> */}}
                         <img src='{{ $.Site.BaseURL }}/{{ .Site.Params.avatar }}' class="avatar">
                         {{ end }}
                     </div>
@@ -51,33 +52,15 @@
                         </div>
                     </div>
                 </div>
+
                 <div style="padding-left: 5px; padding-right: 5px;">
-                    <!-- content -->
+                    {{/* Main text content */}}
                     <div class="context">
                         {{ .Content }}
                     </div>
                     
-                    <!-- add-on info 1: pictures -->
-                    <!-- single picture (old version)-->
-                    {{ with .Params.pic }}
-                        <img src="{{ . }}" class="single-pic" alt="Responsive image" data-fancybox="gallery"></img>
-                    {{ end }}
-
-                    <!-- multiple pictures (old version) -->
-                    {{ $pic_set_filtered := slice}}
-                    {{ with .Params.pic_set }}
-                        {{ range . }}
-                            {{ with . }}
-                            {{ $pic_set_filtered = $pic_set_filtered | append . }}
-                            {{ end }}
-                        {{ end }}
-                    {{ end }}
-
-                    {{ with $pic_set_filtered }}
-                    {{ partial "pic_set.html" (dict "pic_set" .) }}
-                    {{ end }}
-
-                    <!-- new pictures API (combine single & multiple pictures)-->
+                    {{/* add-on info 1: pictures */}}
+                    {{/* new pictures API `pictures` (combine single & multiple pictures)*/}}
                     {{ $pictures_set:= slice}}
                     {{ with .Params.pictures }}
                         {{ range . }}
@@ -97,23 +80,46 @@
                         {{ partial "pic_set.html" (dict "pic_set" $pictures_set) }}
                     {{ end }}
 
-                    <!-- add-on info 2: link -->
+                    {{/* Probably DEPRECATED in the future: single picture (old version API `pic`)*/}}
+                    {{ with .Params.pic }}
+                        <img src="{{ . }}" class="single-pic" alt="Responsive image" data-fancybox="gallery"></img>
+                    {{ end }}
+
+                    {{/* Probably DEPRECATED: multiple pictures (old version API `pic_set`) */}}
+                    {{ $pic_set_filtered := slice}}
+                    {{ with .Params.pic_set }}
+                        {{ range . }}
+                            {{ with . }}
+                            {{ $pic_set_filtered = $pic_set_filtered | append . }}
+                            {{ end }}
+                        {{ end }}
+                    {{ end }}
+
+                    {{ with $pic_set_filtered }}
+                        {{ partial "pic_set.html" (dict "pic_set" .) }}
+                    {{ end }}
+
+
+                    {{/* add-on info 2: hyperlink to other resourse (e.g webpage, Netease music, Bilibili Video) */}}
                     {{ $link_link := .Params.link }}
                     {{ $link_logo := .Params.link_logo }}
                     {{ $link_text := .Params.link_text }}
 
                     {{ with .Params.link }}
-                    {{ partial "link-block.html" (dict "logo" $link_logo "a" $link_link "word" $link_text "baseurl"
-                    $.Site.BaseURL)}}
+                        {{ partial "link-block.html" (dict "logo" $link_logo "a" $link_link "word" $link_text "baseurl"
+                        $.Site.BaseURL)}}
                     {{ end }}
 
-                    <!-- Note info -->
+                    {{/* Note info shown below the main content */}}
                     <div class="moment-note">
                         <p class="note">{{ .Date.Format "15:04" }} {{ .Params.note }}</p>
                         <div style="padding-right: 12px;"><i class="far fa-heart"></i></div>
                     </div>
+
                 </div>
+
                 <hr class="seperating_line">
+
             </div>
         </div>
     </div>
