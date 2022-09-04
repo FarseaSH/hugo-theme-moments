@@ -4,13 +4,16 @@
     {{ $num_per_row = 2}}
     {{ $max_width = 53}}
 {{ end }}
+
+{{ $caption := .caption}}
+
 <div class="pic-grid" style="width: {{ $max_width }}%">
     <div class="pure-g">
         {{ range $num, $a := .pic_set }}
         <div class="pure-u-1-{{ $num_per_row }}">
             <div class="add-padding">
                 <div class="img-container">
-                    <a data-src="{{ $a }}" data-fancybox="gallery">
+                    <a data-src="{{ $a }}" data-fancybox="gallery" data-caption="{{ $caption }}">
                         <img src="{{ $a }}" alt="pictures"/>
                     </a>
                 </div>

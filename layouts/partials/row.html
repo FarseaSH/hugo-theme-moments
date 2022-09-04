@@ -61,7 +61,8 @@
                     
                     {{/* add-on info 1: pictures */}}
                     {{/* new pictures API `pictures` (combine single & multiple pictures)*/}}
-                    {{ $pictures_set:= slice}}
+                    {{ $pictures_set := slice}}
+                    {{ $picture_caption := .Plain}}
                     {{ with .Params.pictures }}
                         {{ range . }}
                             {{ with . }}
@@ -72,20 +73,20 @@
 
                     {{ if (eq (len $pictures_set) 1) }}
                         {{ range $pictures_set }}
-                            <img src="{{ . }}" class="single-pic" alt="Responsive image" data-fancybox="gallery"></img>
+                            <img src="{{ . }}" class="single-pic" alt="Responsive image" data-fancybox="gallery" data-caption={{ $picture_caption }}></img>
                         {{ end }}
                     {{ end }}
 
                     {{ if (gt (len $pictures_set) 1)}}
-                        {{ partial "pic_set.html" (dict "pic_set" $pictures_set) }}
+                        {{ partial "pic_set.html" (dict "pic_set" $pictures_set "other" $.Site.BaseURL "caption" $picture_caption) }}
                     {{ end }}
 
                     {{/* Probably DEPRECATED in the future: single picture (old version API `pic`)*/}}
                     {{ with .Params.pic }}
-                        <img src="{{ . }}" class="single-pic" alt="Responsive image" data-fancybox="gallery"></img>
+                        <img src="{{ . }}" class="single-pic" alt="Responsive image" data-fancybox="gallery" data-caption={{ $picture_caption }}></img>
                     {{ end }}
 
-                    {{/* Probably DEPRECATED: multiple pictures (old version API `pic_set`) */}}
+                    {{/* Probably DEPRECATED in the future: multiple pictures (old version API `pic_set`) */}}
                     {{ $pic_set_filtered := slice}}
                     {{ with .Params.pic_set }}
                         {{ range . }}
@@ -96,7 +97,7 @@
                     {{ end }}
 
                     {{ with $pic_set_filtered }}
-                        {{ partial "pic_set.html" (dict "pic_set" .) }}
+                        {{ partial "pic_set.html" (dict "pic_set" . "caption" $picture_caption) }}
                     {{ end }}
 
 
