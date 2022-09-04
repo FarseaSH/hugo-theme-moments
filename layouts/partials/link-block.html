@@ -37,6 +37,17 @@
     {{ $netease_music_song_id = replaceRE `(https?://)?music\.163\.com/song\?id=([0-9]*)([-a-zA-Z0-9()@:%\+.~#?&/=_]*)` "$2" .a }}
 {{ end }}
 
+{{/* 2.2 bilibili video */}}
+{{ $bilibili_video_url := "0" }}
+{{ if eq 1 (len (findRE `(https?://)?player\.bilibili\.com/player\.html.*` .a)) }}
+    {{ $resource_type = "bilibili_video" }}
+    {{ $bilibili_video_url = .a }}
+{{ end }}
+
+{{ if eq 1 (len (findRE `<iframe src="(//player\.bilibili.com/player\.html\?aid=.*&bvid=.*&cid=.*&page=1)" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>` .a)) }}
+    {{ $resource_type = "bilibili_video" }}
+    {{ $bilibili_video_url = replaceRE `<iframe src="(//player\.bilibili.com/player\.html\?aid=.*&bvid=.*&cid=.*&page=1)" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>` "$1" .a }}
+{{ end }}
 
 {{/* BEGIN generate output */}}
 {{/* PART 1 default link */}}
@@ -53,7 +64,7 @@
             {{ end }}
         </td>
         <td style="padding-left: 20px">
-            <a href="{{ .a }}">{{.word}}</a>
+            <a href="{{ .a }}" target="_blank" rel="noopener noreferrer">{{.word}}</a>
         </td>
     </tr>
     </table>
@@ -66,4 +77,10 @@
     frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 class="netease_music_player"
     src="//music.163.com/outchain/player?type=2&id={{ $netease_music_song_id }}&auto=1&height=66">
 </iframe>
+{{ end }}
+
+{{ if eq "bilibili_video" $resource_type}}
+<div class="bilibili-video">
+    <iframe src="{{ $bilibili_video_url }}" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+</div>
 {{ end }}
