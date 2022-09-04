@@ -5,6 +5,8 @@
     {{ $max_width = 53}}
 {{ end }}
 
+{{ $caption := .caption}}
+
 <div class="pic-grid" style="width: {{ $max_width }}%">
     <div class="pure-g">
         {{ range $num, $a := .pic_set }}
