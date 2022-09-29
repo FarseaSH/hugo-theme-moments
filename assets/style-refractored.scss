@@ -312,3 +312,28 @@ hr {
     } 
 }
 /* END - footer*/
+
+
+/* back-to-top button */
+#back-top-button {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px; 
+    z-index: 99;
+
+    border: none;
+    outline: none;
+
+    background-color: #d1d1d1; /* Set a background color */
+    color: #2157ad; /* Text color */
+
+    opacity: 0.85;
+
+    cursor: pointer; /* Add a mouse pointer on hover */
+
+    padding: 12px;
+    border-radius: 10px; 
+    font-size: 20px;
+}
+  

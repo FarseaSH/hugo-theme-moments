@@ -27,3 +27,23 @@
     });
 </script>
 {{ end }}
+
+
+{{/*  back-top- button */}}
+<button id="back-top-button"><i class="fas fa-chevron-up"></i></button>
+<script>
+    window.onscroll = function() {scrollFunction()};
+    function scrollFunction() {
+        if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
+            $("#back-top-button").fadeIn();
+        } else {
+            $("#back-top-button").fadeOut();
+        }
+    }
+
+
+    $( "#back-top-button" ).click(function() {
+        $("html, body").animate({scrollTop: 0}, 500);
+    });
+</script>
+
