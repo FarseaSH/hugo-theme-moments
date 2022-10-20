@@ -12,10 +12,16 @@
         
             <!-- Pagination -->
             <div class="center">
+
+                {{ if not .Site.Params.infiniteScroll }}
+
                 <div class="pagination">
                     {{ block "pagination" . }}
                     {{ end }}
                 </div>
+
+                {{ end }}
+
             </div>
 
             {{ partial "footer.html" . }}
