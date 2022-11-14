@@ -47,3 +47,50 @@
     });
 </script>
 
+
+{{ if .Site.Params.infiniteScroll }}
+<script>
+var throttle_pause = false;
+var fetching = false;
+var page_number = {{ $.Paginator.PageNumber }};
+const total_pages = {{ $.Paginator.TotalPages }};
+
+const throttle = (func, timeout) => {
+    if (throttle_pause || fetching) return;
+    throttle_pause = true;
+    setTimeout(() => {
+        func();
+        throttle_pause = false;
+    }, timeout);
+};
+
+const loading_wrapper = document.querySelector(".loading-wrapper");
+
+document.addEventListener("scroll", () => {
+    throttle(() => {
+        const last_moment = document.querySelector(".page > .container .moment-row:last-child");
+        const page_end = window.innerHeight + window.pageYOffset + 100 + last_moment.offsetHeight >= document.body.offsetHeight;
+        if (page_end && page_number < total_pages) {
+            fetching = true;
+            loading_wrapper.style.display = "flex";
+            fetch(`/${++page_number}`).then((response) => {
+                return response.text();
+            }).then((html_string) => {
+                const parser = new DOMParser();
+                const next_page = parser.parseFromString(html_string, "text/html");
+                const rows = next_page.querySelectorAll(".moment-row");
+                const container = document.querySelector(".page > .container");
+                rows.forEach((r) => {
+                    container.appendChild(r);
+                });
+            }).catch((err) => {
+                console.log(err);
+            }).then(() => {
+                fetching = false;
+            loading_wrapper.style.display = "none";
+            });
+        }
+    }, 250);
+})
+</script>
+{{ end }}

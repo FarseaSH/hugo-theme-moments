@@ -5,6 +5,9 @@
             {{ partial "row.html" . }}
         {{ end }}
     </div>
+    {{ if .Site.Params.infiniteScroll }}
+        {{ partial "loading.html" . }}
+    {{ end }}
 {{ end }}
 
 

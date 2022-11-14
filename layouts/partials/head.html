@@ -44,6 +44,11 @@
 <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/grids-min.css">
 <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/grids-responsive-min.css">
 
+<!-- CSS for loading animation -->
+{{ if .Site.Params.infiniteScroll }}
+<link rel="stylesheet" href="/style/loading.css">
+{{ end }}
+
 {{/* pangu support: js in the end before the body closing tag */}}
 {{ if .Site.Params.features.pangu }}
 <!-- pangu support -->
