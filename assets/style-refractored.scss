@@ -15,6 +15,13 @@ body{
     font-size: 16px;
     line-height: 24px;
     color: rgb(33, 37, 41);
+    code {
+        font-family: ui-monospace, "Cascadia Mono", "Segoe UI Mono", "Liberation Mono", Menlo, Monaco, Consolas, "Microsoft YaHei", monospace;
+        font-size: 14px;
+        background-color: #e3e6e8;
+        padding: 2px 4px;
+        border-radius: 3px;
+    }
 }
 
 .page{
