@@ -15,13 +15,50 @@ body{
     font-size: 16px;
     line-height: 24px;
     color: rgb(33, 37, 41);
+
     code {
         font-family: ui-monospace, "Cascadia Mono", "Segoe UI Mono", "Liberation Mono", Menlo, Monaco, Consolas, "Microsoft YaHei", monospace;
+    }
+
+    :not(pre) > code {
         font-size: 14px;
         background-color: #e3e6e8;
         padding: 2px 4px;
         border-radius: 3px;
     }
+
+    .highlight {
+        width: 100%;
+        font-size: 13px;
+        margin-bottom: 16px;
+        overflow-x: auto;
+
+        pre {
+            margin: 0;
+            padding: 6px 0;
+        }
+    }
+
+    blockquote {
+        position: relative;
+        overflow: hidden;
+        margin: 0 16px 16px 16px;
+        padding: 16px 0 0 16px;
+        color: #525960;
+
+        &::before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 4px;
+            border-radius: 2px;
+            background: #c8ccd0;
+        }
+    }
+
     overflow-wrap: break-word;
 }
 
