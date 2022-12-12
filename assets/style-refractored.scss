@@ -60,6 +60,14 @@ body{
     }
 
     overflow-wrap: break-word;
+
+    summary {
+        margin-bottom: 4px;
+    }
+
+    details {
+        margin-bottom: 16px;
+    }
 }
 
 .page{
