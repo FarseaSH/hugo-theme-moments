@@ -211,7 +211,6 @@ $gray: #919EB1;
     .avatar{
         max-height: 45px;
         float: left;
-        margin-bottom: 10px;
     }
 
     .intro{
@@ -225,11 +224,17 @@ $gray: #919EB1;
             font-size: 24px;
         }
 
+        div:nth-child(2) {
+            word-break: break-all;
+            line-height: 18px;
+        }
+
         .tag{
             font-size: 80%;
             margin-left: 0px;
             margin-right: 10px;
             color: #6c757d!important;
+            white-space: nowrap;
         
             &::before{
                 content:"#";
@@ -237,6 +242,8 @@ $gray: #919EB1;
             }
         }
     }
+
+    margin-bottom: 16px;
 }
 /* END - user name, avatar & tags */
 
