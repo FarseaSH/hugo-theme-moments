@@ -70,6 +70,13 @@ body{
     }
 }
 
+a {
+    color: #0059b3;
+    &:visited {
+        color: #430085;
+    }
+}
+
 .page{
     max-width: 1150px;
     margin: auto;
