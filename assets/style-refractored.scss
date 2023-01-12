@@ -57,6 +57,10 @@ body{
             border-radius: 2px;
             background: #c8ccd0;
         }
+
+        mark { // fix color for mark inside blockquote
+            color: inherit;
+        }
     }
 
     overflow-wrap: break-word;
