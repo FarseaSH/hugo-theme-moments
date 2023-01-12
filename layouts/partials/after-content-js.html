@@ -78,8 +78,10 @@ document.addEventListener("scroll", () => {
             }).then((html_string) => {
                 const parser = new DOMParser();
                 const next_page = parser.parseFromString(html_string, "text/html");
+                {{ if .Site.Params.heti }}
                 const heti = new Heti(next_page);
                 heti.autoSpacing();
+                {{ end }}
                 const rows = next_page.querySelectorAll(".moment-row");
                 const container = document.querySelector(".page > .container");
                 rows.forEach((r) => {
@@ -97,7 +99,10 @@ document.addEventListener("scroll", () => {
 </script>
 {{ end }}
 
+
+{{ if .Site.Params.heti }}
 <script>
 const heti = new Heti(document);
 heti.autoSpacing();
 </script>
+{{ end }}
