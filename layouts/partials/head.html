@@ -55,6 +55,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js"></script>
 {{ end }}
 
+
+{{ if .Site.Params.heti }}
+<link rel="stylesheet" href="/style/heti.min.css">
+<script src="/scripts/heti-addon.min.js"></script>
+{{ end }}
+
+
 <!-- website title -->
 <title>{{ .Site.Params.title }}</title>
 

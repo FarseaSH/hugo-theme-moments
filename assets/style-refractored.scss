@@ -15,6 +15,71 @@ body{
     font-size: 16px;
     line-height: 24px;
     color: rgb(33, 37, 41);
+
+    code {
+        font-family: ui-monospace, "Cascadia Mono", "Segoe UI Mono", "Liberation Mono", Menlo, Monaco, Consolas, "Microsoft YaHei", monospace;
+    }
+
+    :not(pre) > code {
+        font-size: 14px;
+        background-color: #e3e6e8;
+        padding: 2px 4px;
+        border-radius: 3px;
+    }
+
+    .highlight {
+        padding: 0;
+        width: 100%;
+        font-size: 13px;
+        margin-bottom: 16px;
+        overflow-x: auto;
+
+        pre {
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    blockquote {
+        position: relative;
+        overflow: hidden;
+        margin: 0 16px 16px 16px;
+        padding: 16px 0 0 16px;
+        color: #525960;
+
+        &::before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 4px;
+            border-radius: 2px;
+            background: #c8ccd0;
+        }
+
+        mark { // fix color for mark inside blockquote
+            color: inherit;
+        }
+    }
+
+    overflow-wrap: break-word;
+
+    summary {
+        margin-bottom: 4px;
+    }
+
+    details {
+        margin-bottom: 16px;
+    }
+}
+
+a {
+    color: #0059b3;
+    &:visited {
+        color: #430085;
+    }
 }
 
 .page{
@@ -158,7 +223,6 @@ $gray: #919EB1;
     .avatar{
         max-height: 45px;
         float: left;
-        margin-bottom: 10px;
     }
 
     .intro{
@@ -172,11 +236,17 @@ $gray: #919EB1;
             font-size: 24px;
         }
 
+        div:nth-child(2) {
+            word-break: break-all;
+            line-height: 18px;
+        }
+
         .tag{
             font-size: 80%;
             margin-left: 0px;
             margin-right: 10px;
             color: #6c757d!important;
+            white-space: nowrap;
         
             &::before{
                 content:"#";
@@ -184,6 +254,8 @@ $gray: #919EB1;
             }
         }
     }
+
+    margin-bottom: 24px;
 }
 /* END - user name, avatar & tags */
 
