@@ -58,7 +58,7 @@
                     <div class="context heti">
                         {{ .Content }}
                     </div>
-                    
+
                     {{/* add-on info 1: pictures */}}
                     {{/* new pictures API `pictures` (combine single & multiple pictures)*/}}
                     {{ $pictures_set := slice}}
@@ -69,6 +69,13 @@
                                 {{ $pictures_set = $pictures_set | append . }}
                             {{ end }}
                         {{ end }}
+                    {{ end }}
+
+                    {{ $video_caption := .Plain}}
+                    {{ with .Params.video }}
+                        <a data-src="{{ . }}" data-fancybox="video-gallery" data-caption={{ $video_caption }}>
+                            <video class="video-js" src="{{ . }}"></video>
+                        </a>
                     {{ end }}
 
                     {{ if (eq (len $pictures_set) 1) }}
