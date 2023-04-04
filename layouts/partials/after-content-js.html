@@ -14,13 +14,16 @@
 <!-- fancybox -->
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 
+<!-- videojs -->
+<script src="https://vjs.zencdn.net/8.0.4/video.min.js"></script>
+
 {{/* a pangu support */}}
 {{ if .Site.Params.features.pangu }}
 <!-- pangu.js -->
 <script>
     pangu.spacingElementByClassName('moment-note');
     pangu.spacingElementByClassName('context');
-    
+
     document.addEventListener('DOMContentLoaded', () => {
         // listen to any DOM change and automatically perform spacing via MutationObserver()
         pangu.autoSpacingPage();
