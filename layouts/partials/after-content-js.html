@@ -81,7 +81,7 @@
                 }).then((html_string) => {
                     const parser = new DOMParser();
                     const next_page = parser.parseFromString(html_string, "text/html");
-                    {{ if .Site.Params.heti }}
+                    {{ if .Site.Params.features.heti }}
                     const heti = new Heti(next_page);
                     heti.autoSpacing();
                     {{ end }}
@@ -103,7 +103,7 @@
 {{ end }}
 
 
-{{ if .Site.Params.heti }}
+{{ if .Site.Params.features.heti }}
 <script>
     const heti = new Heti(document);
     heti.autoSpacing();
