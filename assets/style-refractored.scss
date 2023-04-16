@@ -75,12 +75,6 @@ body{
     }
 }
 
-a {
-    color: #0059b3;
-    &:visited {
-        color: #430085;
-    }
-}
 
 .page{
     max-width: 1150px;
@@ -264,6 +258,26 @@ $gray: #919EB1;
 .context{
     clear: left;
     margin-bottom: 10px;
+
+    a {
+        text-decoration: none;
+        color: #0059b3;
+        &:visited {
+            color: #0059b3;
+        }
+        &::after {
+            padding-left: 3px;
+
+            font-family: "Font Awesome 5 Free"; 
+            content: "\f35d";
+            font-weight: 900; 
+            display: inline-block;
+            font-style: normal;
+            font-variant: normal;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+        }
+    }
 }
 
 .single-pic{
@@ -352,6 +366,17 @@ $gray: #919EB1;
     
         margin-top: 0;
         margin-bottom: 0;
+    }
+}
+
+// note at the bottom of each row
+.moment-note {
+    .like-btn {
+        padding-right: 12px;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 }
 
