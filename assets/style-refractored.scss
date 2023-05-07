@@ -285,6 +285,10 @@ $gray: #919EB1;
     max-height: 250px;
     padding-bottom:10px;
     margin-top: 5px; 
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 // pic set
@@ -308,6 +312,10 @@ $gray: #919EB1;
 
     .add-padding{
         padding: 2.5px;
+    }
+
+    &:hover {
+        cursor: pointer;
     }
 }
 
