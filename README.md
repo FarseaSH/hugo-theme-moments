@@ -1,4 +1,4 @@
-<h1 align=center>Hugo 主题 Moments | <a href="https://farseash.github.io/demo-hugo-theme-moments">Demo</a></h1>
+<h1 align=center>Hugo 主题 Moments | <a href="https://farseash.github.io/demo-hugo-theme-moments/moments">Demo</a></h1>
 
 </br>
 
