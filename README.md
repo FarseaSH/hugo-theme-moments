@@ -3,6 +3,7 @@
 <p align="center">
     <img src="https://s1.ax1x.com/2023/07/22/pCqEWOx.png" alt="logo" style="width: 60%" />
 </p>
+
 Moments是一款专门为短博文设计的[Hugo](https://gohugo.io/)主题。开发初衷是在微信朋友圈之外做一个纯粹写给自己的，独立的短文/动态空间，去记录生活点滴，个人思绪，发现与想法。后面发现Moments的使用对象不仅仅可以是自己，还可以是一群人，你可以为是朋友、团队，亦或情侣搭建一个专有的Moments空间。
 
 Moments is a hugo theme designed for micro-blogging. The original intention is to create a personal space for sharing daily life, thoughts, discoveries & ideas, outside Wechat. Later on, it came to my mind that Moments can be a sharing space not only for a single individual, but also for friends, teams or even couples.
