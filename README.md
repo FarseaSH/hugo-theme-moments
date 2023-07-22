@@ -1,6 +1,6 @@
 <h1 align=center>Hugo 主题 Moments | <a href="https://farseash.github.io/demo-hugo-theme-moments/moments">Demo</a></h1>
 
-</br>
+<img src="https://s1.ax1x.com/2023/07/22/pCqEWOx.png" alt="logo" style="zoom: 25%;" />
 
 Moments是一款专门为短博文设计的[Hugo](https://gohugo.io/)主题。开发初衷是在微信朋友圈之外做一个纯粹写给自己的，独立的短文/动态空间，去记录生活点滴，个人思绪，发现与想法。后面发现Moments的使用对象不仅仅可以是自己，还可以是一群人，你可以为是朋友、团队，亦或情侣搭建一个专有的Moments空间。
 
