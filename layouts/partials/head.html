@@ -58,6 +58,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js"></script>
 {{ end }}
 
+{{ if $.site.Params.experimental.comment }}
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+{{ end }}
 
 {{ if .Site.Params.features.heti }}
 <link rel="stylesheet" href="/style/heti.min.css">

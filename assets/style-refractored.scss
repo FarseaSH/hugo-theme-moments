@@ -386,6 +386,14 @@ $gray: #919EB1;
             cursor: pointer;
         }
     }
+
+    .comment-btn {
+        padding-right: 10px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
 }
 
 // hr 
