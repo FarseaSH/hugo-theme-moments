@@ -34,28 +34,45 @@
                         {{ end }}
                     </div>
                     <div class="intro">
+                        <div class="name">
                         {{ with $page.Params.name }}
-                        <div class="name">{{ . }}</div>
+                            {{ . }}
                         {{ else }}
-                        <div class="name">{{ $site.Params.name }}</div>
+                            {{ $site.Params.name }}
                         {{ end }}
-                        <div>
-                            {{ $tags_filtered := slice}}
-                            {{ with $page.Params.tags }}
-                                {{ range . }}
-                                    {{ with .}}
-                                    {{ $tags_filtered = $tags_filtered | append . }}
-                                    {{ end }}
-                                {{ end }}
-                            {{ end }}
-                            {{ with $tags_filtered }}
-                                {{ range . }}<span class="tag text-muted">{{ . }}</span>{{ end }}
-                            {{ end }}
+                        </div>
+
+                        <div class="moment-signature">
+                        {{ with $page.Params.signature }}
+                            {{ . }}
+                        {{ else }}
+                            发布了
+                        {{ end }}
                         </div>
                     </div>
                 </div>
 
                 <div style="padding-left: 5px; padding-right: 5px;">
+                    {{/* tag */}}
+                    {{ $tags_filtered := slice}}
+                    {{ with $page.Params.tags }}
+                        {{ range . }}
+                            {{ with .}}
+                            {{ $tags_filtered = $tags_filtered | append . }}
+                            {{ end }}
+                        {{ end }}
+                    {{ end }}
+                    {{ with $tags_filtered }}
+                        <div class="tag-div">
+                            {{ range . }}
+                            <div class="new-tag">
+                            {{ . }}
+                            </div>
+                            {{ end }}
+                        </div>
+                    {{ end }}
+
+
                     {{/* Main text content */}}
                     {{ if .Site.Params.features.heti }}<div class="context heti">{{ else }}<div class="context">{{ end }}
                         {{ $page.Content }}

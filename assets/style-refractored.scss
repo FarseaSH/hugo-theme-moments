@@ -217,6 +217,7 @@ $gray: #919EB1;
     .avatar{
         max-height: 45px;
         float: left;
+        margin-right: 5px;
     }
 
     .intro{
@@ -235,17 +236,10 @@ $gray: #919EB1;
             line-height: 18px;
         }
 
-        .tag{
+        .moment-signature{
             font-size: 80%;
-            margin-left: 0px;
-            margin-right: 10px;
             color: #6c757d!important;
             white-space: nowrap;
-        
-            &::before{
-                content:"#";
-                padding-right: 1px;
-            }
         }
     }
 
@@ -276,6 +270,48 @@ $gray: #919EB1;
             font-variant: normal;
             text-rendering: auto;
             -webkit-font-smoothing: antialiased;
+        }
+    }
+}
+
+.tag-div {
+    display: -webkit-flex;
+    display: flex;   
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    margin-bottom: 20px;
+    .new-tag {
+        line-height: 30px;
+        padding-left: 20px;
+        padding-right: 15px;
+        margin-right: 10px;
+        
+		border-radius: 15px;
+
+        background-color: #EDEDED;
+        color: #132939;
+
+        text-indent: -10px;
+        font-size: 90%;
+        white-space: nowrap;
+
+        &::before{
+            content:"#";
+            text-align: center;
+
+            background-color: #8EA1B0;
+            color: #ffffff;
+
+            padding-top: 1px;
+            padding-bottom: 1px;
+            padding-left: 6px;
+            padding-right: 6px;
+		    border-radius: 12px;
+
+            margin-right: 2px;
+
+            font-size: 110%;
         }
     }
 }
