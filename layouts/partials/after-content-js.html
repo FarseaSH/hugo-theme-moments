@@ -13,3 +13,37 @@
 
 <!-- fancybox -->
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
+
+{{/* a pangu support */}}
+{{ if .Site.Params.features.pangu }}
+<!-- pangu.js -->
+<script>
+    pangu.spacingElementByClassName('moment-note');
+    pangu.spacingElementByClassName('context');
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        // listen to any DOM change and automatically perform spacing via MutationObserver()
+        pangu.autoSpacingPage();
+    });
+</script>
+{{ end }}
+
+
+{{/*  back-top- button */}}
+<button id="back-top-button"><i class="fas fa-chevron-up"></i></button>
+<script>
+    window.onscroll = function() {scrollFunction()};
+    function scrollFunction() {
+        if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
+            $("#back-top-button").fadeIn();
+        } else {
+            $("#back-top-button").fadeOut();
+        }
+    }
+
+
+    $( "#back-top-button" ).click(function() {
+        $("html, body").animate({scrollTop: 0}, 500);
+    });
+</script>
+

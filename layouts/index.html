@@ -11,12 +11,11 @@
 {{ define "pagination" }}
     {{ $paginator := .Paginate ((where .Site.RegularPages "Section" "moments").ByParam "top") }}
     {{ if $paginator.HasPrev }}
-    
-    <a class="page-link" href="{{$.Site.BaseURL}}/{{sub $paginator.PageNumber 1 }}">
-        <div class="page-item">Previous</div>
-    </a>
+        <a class="page-link" href="{{$.Site.BaseURL}}/{{sub $paginator.PageNumber 1 }}">
+            <div class="page-item">< Prev</div>
+        </a>
     {{ else }}
-        <div class="page-item disabled">Previous</div>
+        <div class="page-item disabled">< Prev</div>
     {{ end }}
 
     {{ $current_num := $paginator.PageNumber }}
@@ -29,10 +28,10 @@
     {{end}}
 
     {{ if $paginator.HasNext }}
-    <a class="page-link" href="{{$.Site.BaseURL}}/{{ add $paginator.PageNumber 1 }}">
-        <div class="page-item">Next</div>
-    </a>
+        <a class="page-link" href="{{$.Site.BaseURL}}/{{ add $paginator.PageNumber 1 }}">
+            <div class="page-item">Next ></div>
+        </a>
     {{ else }}
-        <div class="page-item disabled">Next</div>
+        <div class="page-item disabled">Next ></div>
     {{ end }}
 {{ end }}
