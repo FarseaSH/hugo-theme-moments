@@ -90,11 +90,11 @@
                         {{ end }}
                     {{ end }}
 
-                    {{ $video_caption := $page.Plain}}
+                    {{/* EXPERIMENTAL video support */}}
                     {{ with $page.Params.video }}
-                        <a data-src="{{ . }}" data-fancybox="video-gallery" data-caption={{ $video_caption }}>
-                            <video class="video-js" src="{{ . }}"></video>
-                        </a>
+                    <video class="video-js" controls preload="auto" width="320" height="200" data-setup="{}" style="margin-bottom: 10px;">
+                        <source src="{{ . }}"/>
+                    </video>
                     {{ end }}
 
                     {{ if (eq (len $pictures_set) 1) }}
