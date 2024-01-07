@@ -1,6 +1,5 @@
 {{ $page := .page }}
 {{ $index := .index }}
-{{ $site := .site }}
 <div class="moment-row">
 
     <div class="pure-g">
@@ -30,7 +29,7 @@
                         <img src='{{ . }}' class="avatar">
                         {{ else }}
                         {{/* fixme check whether the default avatar path is url or not--> */}}
-                        <img src='{{ $site.BaseURL }}/{{ $page.Site.Params.avatar }}' class="avatar">
+                        <img src='{{ $page.Site.BaseURL }}/{{ $page.Site.Params.avatar }}' class="avatar">
                         {{ end }}
                     </div>
                     <div class="intro">
@@ -134,7 +133,7 @@
 
                     {{ with $page.Params.link }}
                         {{ partial "link-block.html" (dict "logo" $link_logo "a" $link_link "word" $link_text "baseurl"
-                        $.Site.BaseURL)}}
+                        $page.Site.BaseURL)}}
                     {{ end }}
 
                     {{/* Note info shown below the main content */}}
