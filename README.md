@@ -1,4 +1,4 @@
-<h1 align=center>Hugo 主题 Moments | <a href="https://farseash.github.io/demo-hugo-theme-moments/moments">Demo</a></h1>
+<h1 align=center>Hugo 主题 Moments | <a href="https://farseash.github.io/demo-hugo-theme-moments/demo/">Demo</a></h1>
 
 <p align="center">
     <img src="https://s1.ax1x.com/2023/07/22/pCqEWOx.png" alt="logo" style="width: 60%" />
@@ -8,13 +8,19 @@ Moments是一款专门为短博文设计的[Hugo](https://gohugo.io/)主题。�
 
 Moments is a hugo theme designed for micro-blogging. The original intention is to create a personal space for sharing daily life, thoughts, discoveries & ideas, outside Wechat. Later on, it came to my mind that Moments can be a sharing space not only for a single individual, but also for friends, teams or even couples.
 
+> 我正开发另一个项目——使用Notion，结合Moments主题，免费、快速搭建短博文平台。即将发布。
+> 
+> I'm currently working on another project: with the help of Notion, together with this Moments theme, build a micro-blogging platform, simple and free. It will be released soon.
+
 ## Screenshot
 
-![demo](https://z3.ax1x.com/2021/10/24/5RzwjK.png)
+![demo](https://s11.ax1x.com/2024/01/07/pFSuyPU.png)
+
+Check it out 👉 [Moments Demo](https://farseash.github.io/demo-hugo-theme-moments/demo/)
 
 ## 特点 Feature
 
-1. 第一款专门支持短博文的Hugo主题
+1. 专门支持短博文的Hugo主题
 2. 响应式设计，桌面端&手机端精心适配
 3. 拥有和社交平台一致的图片浏览体验
 4. 简洁的设计，纯净的体验，摆脱社交平台广告
