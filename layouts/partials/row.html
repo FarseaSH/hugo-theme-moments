@@ -38,7 +38,7 @@
                         {{ with $page.Params.name }}
                             {{ . }}
                         {{ else }}
-                            {{ $site.Params.name }}
+                            {{ $page.Site.Params.name }}
                         {{ end }}
                         </div>
 
