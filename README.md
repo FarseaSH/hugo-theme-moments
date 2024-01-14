@@ -64,7 +64,6 @@ note:
 
 ```
 ---
-top: 7
 name: Frank
 signature: '@Moments 向导 002'
 avatar: https://s11.ax1x.com/2024/01/07/pizHZLV.png
