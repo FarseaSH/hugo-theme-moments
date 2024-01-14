@@ -32,7 +32,7 @@ Check it out 👉 [Moments Demo](https://farseash.github.io/demo-hugo-theme-mome
 
 ### 附加图片的 Moment
 
-<img src="https://s11.ax1x.com/2024/01/11/pFCm8Et.png" alt="图片集的Moment" style="max-width: 400px">
+<img src="https://s11.ax1x.com/2024/01/11/pFCm8Et.png" alt="图片集的Moment" style="width: 400px">
 
 ```
 ---
@@ -60,7 +60,7 @@ note:
 
 ### 分享文章的 Moment
 
-<img src="https://s11.ax1x.com/2024/01/11/pFCmUgg.png" alt="分享链接Moment" style="max-width: 400px">
+<img src="https://s11.ax1x.com/2024/01/11/pFCmUgg.png" alt="分享链接Moment" style="width: 400px">
 
 ```
 ---
@@ -82,7 +82,7 @@ note:
 
 ### 分享视频的 Moment
 
-<img src="https://s11.ax1x.com/2024/01/14/pFPvjfI.png" alt="分享视频Moment" style="max-width: 400px">
+<img src="https://s11.ax1x.com/2024/01/14/pFPvjfI.png" alt="分享视频Moment" style="width: 400px">
 
 ```
 ---
