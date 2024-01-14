@@ -32,12 +32,9 @@ Check it out 👉 [Moments Demo](https://farseash.github.io/demo-hugo-theme-mome
 
 ### 附加图片的 Moment
 
-<div style="display: flex; flex-wrap: wrap;">
-    <div style="min-width: 320px; max-width: 400px">
-        <img src="https://s11.ax1x.com/2024/01/11/pFCm8Et.png" alt="图片集的Moment" style="">
-    </div>
-    <div style="width: 450px">
-        <pre class="notranslate"><code style="text-wrap: nowrap">
+<img src="https://s11.ax1x.com/2024/01/11/pFCm8Et.png" alt="图片集的Moment" style="max-width: 400px">
+
+```
 ---
 name: Frank
 signature: '@Moments 向导 002'
@@ -59,18 +56,13 @@ note:
 ---
 
 好嘞～众所周知，美食能治愈一切！以下图片不建议睡前点开。
-        </code></pre>
-    </div>
-</div>
+```
 
 ### 分享文章的 Moment
 
-<div style="display: flex; flex-wrap: wrap;">
-    <div style="min-width: 320px; max-width: 400px">
-        <img src="https://s11.ax1x.com/2024/01/11/pFCmUgg.png" alt="分享链接Moment" style="">
-    </div>
-    <div style="width: 450px">
-        <pre class="notranslate"><code style="text-wrap: nowrap">
+<img src="https://s11.ax1x.com/2024/01/11/pFCmUgg.png" alt="分享链接Moment" style="max-width: 400px">
+
+```
 ---
 top: 7
 name: Frank
@@ -85,19 +77,14 @@ note:
 ---
 
 这篇公众号文章也挺不错的，推荐给大家。
-        </code></pre>
-    </div>
-</div>
+```
 
 
 ### 分享视频的 Moment
 
-<div style="display: flex; flex-wrap: wrap;">
-    <div style="min-width: 320px; max-width: 400px">
-        <img src="https://s11.ax1x.com/2024/01/14/pFPvjfI.png" alt="分享视频Moment" style="">
-    </div>
-    <div style="width: 450px">
-        <pre class="notranslate"><code style="text-wrap: nowrap">
+<img src="https://s11.ax1x.com/2024/01/14/pFPvjfI.png" alt="分享视频Moment" style="max-width: 400px">
+
+```
 ---
 name: Frank
 signature: '@Moments 向导 002'
@@ -110,11 +97,9 @@ note:
 ---
 
 我是B站木鱼水心的粉丝，最近更新的史记系列超级好看。
-        </code></pre>
-    </div>
-</div>
+```
 
-## 更多正在设计开发中的 Moment 类型
+### 更多正在设计开发中的 Moment 类型
 
 - 纪念日 / 倒数日
 - 文字摘录引用
