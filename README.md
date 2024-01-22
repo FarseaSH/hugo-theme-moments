@@ -156,7 +156,7 @@ paginatePath = '.'
 ### 创建新的Moment
 
 ```
-hugo new your_moments_name.md
+hugo new moments/your_moment_name.md
 ```
 
 ### 将自己的Moments发布到网上
