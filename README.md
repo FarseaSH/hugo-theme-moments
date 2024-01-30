@@ -113,11 +113,12 @@ note:
 ### 安装
 
 <!-- todo 要求 -->
+**注意：** 主题的使用需要安装 extended 版本的 Hugo，详见 [https://gohugo.io/installation/](https://gohugo.io/installation/)
 
 ```bash
 $ hugo new site my_moments_name
 $ cd my_moments_name
-$ git clone https://github.com/FarseaSH/hugo-theme-moments themes/moments
+$ git clone https://github.com/FarseaSH/hugo-theme-moments.git themes/moments
 ```
 
 ### 第一次配置
