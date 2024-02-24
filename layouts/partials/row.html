@@ -53,7 +53,7 @@
 
                 <div style="padding-left: 5px; padding-right: 5px;">
                     {{/* tag */}}
-                    {{ $tags_filtered := slice}}
+                    {{ $tags_filtered := slice }}
                     {{ with $page.Params.tags }}
                         {{ range . }}
                             {{ with .}}
@@ -64,9 +64,7 @@
                     {{ with $tags_filtered }}
                         <div class="tag-div">
                             {{ range . }}
-                            <div class="new-tag">
-                            {{ . }}
-                            </div>
+                            <div class="new-tag">{{ trim . " " }}</div>
                             {{ end }}
                         </div>
                     {{ end }}
