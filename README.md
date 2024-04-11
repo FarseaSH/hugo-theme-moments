@@ -18,6 +18,8 @@ Moments is a hugo theme designed for micro-blogging. The original intention is t
 
 Check it out 👉 [Moments Demo](https://farseash.github.io/demo-hugo-theme-moments/demo/)
 
+更多Moments用例: [情侣点滴](https://farseash.github.io/demo-hugo-theme-moments/showcases/couple/) | 朋友分享 | 个人成长 | 产品更新
+
 ## 特点 Feature
 
 1. 专门支持短博文的 Hugo 主题
