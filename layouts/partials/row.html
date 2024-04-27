@@ -5,7 +5,7 @@
     <div class="pure-g">
 
         {{/* time info shown in the left (or above in small screens) */}}
-        <div class="pure-u-1 pure-u-sm-1-3">
+        <div class="pure-u-1 pure-u-sm-1-4">
             <div class="time">
                 <div class="month-day">{{ $page.Date.Format "Jan 2"}}{{ if in (slice 1 21 31) $page.Date.Day}}st{{ else if in (slice 2 22) $page.Date.Day}}nd{{ else if in (slice 3 23) $page.Date.Day}}rd{{ else }}th{{ end }}</div>
                 <div class="year">{{ $page.Date.Format "2006"}}</div>
@@ -13,11 +13,11 @@
         </div>
 
         {{/* moment-main-content */}}
-        <div class="pure-u-1 pure-u-sm-2-3">
+        <div class="pure-u-1 pure-u-sm-3-4">
             <div class="moment-content">
                 {{/* top mark */}}
                 {{ if gt $page.Params.top 0}}
-                <div class="top-mark" style="position: absolute; right: 5%;">
+                <div class="top-mark">
                     <i class="fas fa-bookmark" style="color: #e76b4f;"></i>
                 </div>
                 {{ end }}
@@ -51,7 +51,7 @@
                     </div>
                 </div>
 
-                <div style="padding-left: 5px; padding-right: 5px;">
+                <div class="main-context">
                     {{/* tag */}}
                     {{ $tags_filtered := slice }}
                     {{ with $page.Params.tags }}

@@ -89,6 +89,11 @@ body{
 
 .moment-content{
     position: relative;
+
+    .top-mark {
+        position: absolute;
+        right: 0%;
+    }
 }
 
 .moment-row{
@@ -107,8 +112,8 @@ body{
     }
 
     .container{
-        padding-left: 10px;
-        padding-right: 10px;
+        padding-left: 30px;
+        padding-right: 30px;
     }
 }
 
@@ -182,7 +187,7 @@ $gray: #919EB1;
 /* START - time */
 .time{
     text-align: right;
-    padding-right: 60px;
+    padding-right: 80px;
     /* white-space: nowrap; */
     font-weight: 300;
     margin-bottom: 20px;
@@ -204,7 +209,7 @@ $gray: #919EB1;
 }
 @media (max-width: 720px) and (min-width:576px){
     .time{
-        padding-right: 20px;
+        padding-right: 40px;
     }
 }
 /* END - time */
@@ -401,12 +406,10 @@ $gray: #919EB1;
     display: flex;
     margin-bottom: 10px;
     justify-content: space-between;
-    margin-right: 5px; 
     color:#808080;
 
     .note{
         font-size: 80%;
-        text-indent: 20px;
         color: rgba(0, 0, 0, 0.5);
     
         margin-top: 0;
@@ -417,8 +420,6 @@ $gray: #919EB1;
 // note at the bottom of each row
 .moment-note {
     .like-btn {
-        padding-right: 12px;
-
         &:hover {
             cursor: pointer;
         }
@@ -439,7 +440,6 @@ hr {
     border-width: 0;
     border-top: 1px solid;
     border-color: rgba(0, 0, 0, 0.1);
-    max-width: 75%;
     clear: both
 }
 /* END - for the main content */
