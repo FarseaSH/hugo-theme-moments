@@ -136,7 +136,7 @@
 
                     {{/* Note info shown below the main content */}}
                     <div class="moment-note">
-                        <p class="note">{{ $page.Date.Format "15:04" }} {{ $page.Params.note }}</p>
+                        <p class="note"><span class="note-time">{{ $page.Date.Format "15:04" }}</span><span class="note-context">{{ $page.Params.note }}</span></p>
                         <div class="buttons" style="display: flex;">
                             {{ if $.site.Params.experimental.comment }}<div class="comment-btn" id="comment-btn-{{ $index }}"><i class="far fa-comment"></i></div>{{ end }}
                             <div class="like-btn"><i class="far fa-heart"></i></div>
