@@ -1,0 +1,4 @@
+{
+    "sectionName": "{{ default "index" .Section }}",
+    "momentCount": {{ len .Site.RegularPages }}
+}
