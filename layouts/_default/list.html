@@ -1,6 +1,6 @@
 {{ define "main" }}
-    <div class="container bodycontainer">
-        {{ $paginator := .Paginate ((where $.Site.RegularPages "Section" .Section ).ByParam "top") }}
+    <div class="container">
+        {{ $paginator := .Paginate ((where $.Site.RegularPages "Section" .Section).ByParam "top") }}
         {{ range $i, $page := $paginator.Pages }}
             {{ partial "row.html" (dict "page" $page "index" $i) }}
         {{ end }}
@@ -9,30 +9,6 @@
 
 
 {{ define "pagination" }}
-    {{ $paginator := .Paginate ((where $.Site.RegularPages "Section" .Section ).ByParam "top") }}
-    {{ if $paginator.HasPrev }}
-        <a class="page-link" href="{{ $paginator.Prev.URL }}">
-            <div class="page-item">< Prev</div>
-        </a>
-    {{ else }}
-        <div class="page-item disabled">< Prev</div>
-    {{ end }}
-
-    {{ $current_num := $paginator.PageNumber }}
-    {{ range $i, $pager := $paginator.Pagers }}
-        {{ $i = add $i 1}}
-        {{ if (eq $current_num $i)}}
-        <div class="page-item active">{{ $i }}</div>
-        {{ else }}
-        <a class="page-link" href="{{ $pager.URL }}"><div class="page-item">{{ $i }}</div></a>
-        {{ end }}
-    {{end}}
-
-    {{ if $paginator.HasNext }}
-        <a class="page-link" href="{{ $paginator.Next.URL }}">
-            <div class="page-item">Next ></div>
-        </a>
-    {{ else }}
-        <div class="page-item disabled">Next ></div>
-    {{ end }}
+    {{ $paginator := .Paginate ((where $.Site.RegularPages "Section" .Section).ByParam "top") }}
+    {{ partial "pagination.html" (dict "paginator" $paginator) }}
 {{ end }}

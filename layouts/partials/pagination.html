@@ -1,0 +1,83 @@
+{{ $paginator := .paginator }}
+<div class="pagination">
+    
+    {{ if $paginator.HasPrev }}
+    <a class="page-link" href="{{ $paginator.Prev.URL }}">
+        <div class="page-item">< Prev</div>
+    </a>
+    {{ else }}
+        <div class="page-item disabled">< Prev</div>
+    {{ end }}
+
+
+    {{/* If the number of pagers is more than 5, use `...` to skip some pages */}}
+    {{ if (le $paginator.TotalPages 5) }}
+        {{ $current_num := $paginator.PageNumber }}
+        {{ range $i, $pager := $paginator.Pagers }}
+            {{ if (eq $current_num $pager.PageNumber) }}
+            <div class="page-item active">{{ $pager.PageNumber }}</div>
+            {{ else }}
+            <a class="page-link" href="{{ $pager.URL }}"><div class="page-item">{{ $pager.PageNumber }}</div></a>
+            {{ end }}
+        {{ end }}
+
+    {{ else }}
+        {{ $first_page_num := 1 }}
+        {{ $second_page_num := 2 }}
+        {{ $last_page_num := $paginator.TotalPages }}
+        {{ $second_last_page_num := (add $paginator.TotalPages -1) }}
+        {{ $third_last_page_num := (add $paginator.TotalPages -2) }}
+        {{ $current_num := $paginator.PageNumber }}
+
+        {{/* place 1 */}}
+        {{ if (eq $current_num $first_page_num) }}
+            <div class="page-item active">{{ $current_num }}</div>
+        {{ else }}
+            <a class="page-link" href="{{ $paginator.First.URL }}"><div class="page-item">1</div></a>
+        {{ end }}
+
+        {{/* place 2 */}}
+        {{ if (eq $current_num $second_page_num) }}
+            <div class="page-item active">{{ $current_num }}</div>
+        {{ else if (le $current_num 3)}}
+            <a class="page-link" href="{{ $paginator.First.Next.URL }}"><div class="page-item">{{ $second_page_num }}</div></a>
+        {{ else }}
+            <div class="page-item">...</div>
+        {{ end }}
+
+        {{/* place 3 */}}
+        {{ if (le $current_num $second_page_num)}}
+            <a class="page-link" href="{{ $paginator.First.Next.Next.URL }}"><div class="page-item">3</div></a>
+        {{ else if (ge $current_num $second_last_page_num) }}
+            <a class="page-link" href="{{ $paginator.Last.Prev.Prev.URL }}"><div class="page-item">{{ $third_last_page_num }}</div></a>
+        {{ else }}
+            <div class="page-item active">{{ $current_num }}</div>
+        {{ end }}
+
+        {{/* place 4 */}}
+        {{ if (eq $current_num $second_last_page_num) }}
+            <div class="page-item active">{{ $current_num }}</div>
+        {{ else if (ge $current_num $third_last_page_num) }}
+            <a class="page-link" href="{{ $paginator.Last.Prev.URL }}"><div class="page-item">{{ $second_last_page_num }}</div></a>
+        {{ else }}
+            <div class="page-item">...</div>
+        {{ end }}
+
+        {{/* place 5 */}}
+        {{ if (eq $current_num $last_page_num) }}
+            <div class="page-item active">{{ $current_num }}</div>
+        {{ else }}
+            <a class="page-link" href="{{ $paginator.Last.URL }}"><div class="page-item">{{ $last_page_num }}</div></a>
+        {{ end }}
+    {{ end }}
+
+
+    {{ if $paginator.HasNext }}
+        <a class="page-link" href="{{ $paginator.Next.URL }}">
+            <div class="page-item">Next ></div>
+        </a>
+    {{ else }}
+        <div class="page-item disabled">Next ></div>
+    {{ end }}
+
+</div>

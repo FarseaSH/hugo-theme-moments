@@ -13,28 +13,5 @@
 
 {{ define "pagination" }}
     {{ $paginator := .Paginate (.Site.RegularPages.ByParam "top") }}
-    {{ if $paginator.HasPrev }}
-        <a class="page-link" href="{{$.Site.BaseURL}}/{{sub $paginator.PageNumber 1 }}">
-            <div class="page-item">< Prev</div>
-        </a>
-    {{ else }}
-        <div class="page-item disabled">< Prev</div>
-    {{ end }}
-
-    {{ $current_num := $paginator.PageNumber }}
-    {{ range (seq 1 $paginator.TotalPages) }}
-        {{ if (eq $current_num .)}}
-        <div class="page-item active">{{.}}</div>
-        {{ else }}
-        <a class="page-link" href="{{$.Site.BaseURL}}/{{.}}"><div class="page-item">{{.}}</div></a>
-        {{ end }}
-    {{end}}
-
-    {{ if $paginator.HasNext }}
-        <a class="page-link" href="{{$.Site.BaseURL}}/{{ add $paginator.PageNumber 1 }}">
-            <div class="page-item">Next ></div>
-        </a>
-    {{ else }}
-        <div class="page-item disabled">Next ></div>
-    {{ end }}
+    {{ partial "pagination.html" (dict "paginator" $paginator) }}
 {{ end }}
