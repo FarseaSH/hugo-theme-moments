@@ -3,6 +3,7 @@
 {{ $resource_type := "link" }}
 
 {{ $logo_file := "default_link_logo.png" }}
+{{ $index := .index | safeJS }}
 
 {{/* 1.1 Wechat articles */}}
 {{ if eq 1 (len (findRE `(https?://)?mp\.weixin\.qq\.com([-a-zA-Z0-9()@:%\+.~#?&/=_]*)` .a)) }}
@@ -49,6 +50,14 @@
     {{ $bilibili_video_url = replaceRE `<iframe src="(//player\.bilibili.com/player\.html\?aid=.*&bvid=.*&cid=.*&page=1)" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>` "$1" .a }}
 {{ end }}
 
+
+{{/* 2.3 audio/music support */}}
+{{ if eq 1 (len (findRE `.*\.(mp3|MP3|flac|FLAC|wav|WAV)` .a)) }}
+    {{ $resource_type = "audio_file" }}
+    {{ $audio_file_url := .a }}
+{{ end }}
+
+
 {{/* BEGIN generate output */}}
 {{/* PART 1 default link */}}
 {{ if eq "link" $resource_type }}
@@ -84,3 +93,47 @@
     <iframe src="{{ $bilibili_video_url }}" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
 </div>
 {{ end }}
+
+
+{{/* audio/music support */}}
+{{ if eq "audio_file" $resource_type }}
+
+<div class="audio-player">
+    <div class="left_part">
+        <div class="music_title">{{ .word }}</div>
+        <div class="music_duration">
+            <span id="currentTime_{{ $index }}">00 : 00</span>
+            <span id="duration_{{ $index }}">00 : 00</span>
+        </div>
+        <div class="music_progress" id="playerProgress_{{ $index }}">
+            <div class="progress_inplay" id="progress_{{ $index }}"></div>
+        </div>
+    </div>
+
+    <div class="right_part">
+        <div class="player_controls">
+            <i class="fas fa-play play-button" id="playBtn_{{ $index }}"></i>
+        </div>
+    </div>
+</div>
+
+<script>
+    let song_{{ $index }} = new Audio();
+    song_{{ $index }}.src = "{{ .a }}";
+
+    let playerProgress_{{ $index }} = document.getElementById("playerProgress_{{ $index }}");
+    let progress_{{ $index }} = document.getElementById("progress_{{ $index }}");
+    let currentTime_{{ $index }} = document.getElementById("currentTime_{{ $index }}");
+    let duration_{{ $index }} = document.getElementById("duration_{{ $index }}");
+    let playBtn_{{ $index }} = document.getElementById("playBtn_{{ $index }}");
+
+    song_{{ $index }}.addEventListener("ended", () => togglePlay(song_{{ $index }}, progress_{{ $index }}));
+    song_{{ $index }}.addEventListener("timeupdate", () => updateProgressBar(progress_{{ $index }}, duration_{{ $index }}, currentTime_{{ $index }}, song_{{ $index }}));
+
+    playerProgress_{{ $index }}.addEventListener("click", e => setProgressBar(e, playerProgress_{{ $index }}, song_{{ $index }}));
+    playBtn_{{ $index }}.addEventListener("click", () => togglePlay(song_{{ $index }}, playBtn_{{ $index }}));
+</script>
+
+{{ end }}
+
+
