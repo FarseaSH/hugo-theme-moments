@@ -131,7 +131,7 @@
 
                     {{ with $page.Params.link }}
                         {{ partial "link-block.html" (dict "logo" $link_logo "a" $link_link "word" $link_text "baseurl"
-                        $page.Site.BaseURL)}}
+                        $page.Site.BaseURL "index" $index) }}
                     {{ end }}
 
                     {{/* Note info shown below the main content */}}
