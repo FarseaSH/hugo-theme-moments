@@ -58,17 +58,17 @@
     align-items: center;
   }
 
-.fas {
+.audio-player .fas {
     color: #5781b2;
     cursor: pointer;
     margin-right: 25px;
     user-select: none;
     transition: all 0.3s ease-in;
-  }
+}
 
-.fas:hover {
+.audio-player .fas:hover {
     filter: brightness(80%);
-  }
+}
 
 .play-button {
     font-size: 36px;
