@@ -277,6 +277,24 @@ $gray: #919EB1;
             -webkit-font-smoothing: antialiased;
         }
     }
+
+    // ordered & unordered list style
+
+    ol li {
+        padding-left: 5px;
+
+        &::marker {
+            color: #919EB1;
+        }
+    }
+
+    ul li {
+        padding-left: 5px;
+
+        &::marker {
+            color: #919EB1;
+        }
+    }
 }
 
 .tag-div {
