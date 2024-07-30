@@ -1,4 +1,11 @@
-<div class="jumbotron" style="background-image: url({{ .Site.Params.cover }});">
+{{ $background_path :=  "default-background.png" }}
+{{ with .Site.Params.cover }}
+    {{ $background_path = . }}
+{{ end }}
+{{ if resources.Get $background_path }}
+    {{ $background_path = (resources.Get $background_path).Permalink }}
+{{ end }}
+<div class="jumbotron" style="background-image: url({{ $background_path }});">
     <div class="container">
         <div class="site-title">{{ .Site.Params.title }}</div>
         <p class="signature">{{ .Site.Params.signature }}</p>
