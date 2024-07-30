@@ -128,7 +128,7 @@ $ git clone https://github.com/FarseaSH/hugo-theme-moments.git themes/moments
 将以下设置覆盖到`config.toml`文件中
 
 ```
-baseURL = "https://farseash.github.io/demo-hugo-theme-moments/"
+baseURL = "https://YOUR-MOMENTS-PATH.com"
 languageCode = "zh-Hans"
 theme = "moments"
 paginate = 10
@@ -137,10 +137,7 @@ paginatePath = '.'
 [params]
     title = "Moments Demo"
     signature = "人生如逆旅，我亦是行人。"
-    cover = "https://cdn.pixabay.com/photo/2018/03/13/22/53/puzzle-3223941_1280.jpg"
-
     name = "Default User"
-    avatar = "/img/default_avatar.png"
 ```
 
 
