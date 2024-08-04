@@ -26,7 +26,7 @@
                 <div class="user-info">
                     <div class="avatar-block">
                         {{ $avatar_path :=  "default-avatar.png" }}
-                        {{ with .Site.Params.avatar }}
+                        {{ with $page.Site.Params.avatar }}
                             {{ $avatar_path = . }}
                         {{ end }}
                         {{ with $page.Params.avatar }}
@@ -76,7 +76,7 @@
 
 
                     {{/* Main text content */}}
-                    {{ if .Site.Params.features.heti }}<div class="context heti">{{ else }}<div class="context">{{ end }}
+                    {{ if $page.Site.Params.features.heti }}<div class="context heti">{{ else }}<div class="context">{{ end }}
                         {{ $page.Content }}
                     </div>
 
@@ -106,7 +106,7 @@
                     {{ end }}
 
                     {{ if (gt (len $pictures_set) 1)}}
-                        {{ partial "pic_set.html" (dict "pic_set" $pictures_set "other" $.Site.BaseURL "caption" $picture_caption) }}
+                        {{ partial "pic_set.html" (dict "pic_set" $pictures_set "other" $page.Site.BaseURL "caption" $picture_caption) }}
                     {{ end }}
 
                     {{/* Probably DEPRECATED in the future: single picture (old version API `pic`)*/}}
@@ -143,12 +143,12 @@
                     <div class="moment-note">
                         <p class="note"><span class="note-time">{{ $page.Date.Format "15:04" }}</span><span class="note-context">{{ $page.Params.note }}</span></p>
                         <div class="buttons" style="display: flex;">
-                            {{ if $.site.Params.experimental.comment }}<div class="comment-btn" id="comment-btn-{{ $index }}"><i class="far fa-comment"></i></div>{{ end }}
+                            {{ if $page.Site.Params.experimental.comment }}<div class="comment-btn" id="comment-btn-{{ $index }}"><i class="far fa-comment"></i></div>{{ end }}
                             <div class="like-btn"><i class="far fa-heart"></i></div>
                         </div>
                     </div>
 
-                    {{ if $.site.Params.experimental.comment }}
+                    {{ if $page.Site.Params.experimental.comment }}
                     <div id="row-comment-{{ $index }}" style="display: none;">
                         <div id="gitalk-container-{{ $index }}"></div>
                     </div>
