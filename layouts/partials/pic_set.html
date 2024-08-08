@@ -1,3 +1,6 @@
+{{ $pic_set := .pic_set }}
+{{ $caption := .caption }}
+
 {{ $num_per_row := 3}}
 {{ $max_width := 80}}
 {{ if or (eq (len .pic_set) 2) (eq (len .pic_set) 4)}}
@@ -5,11 +8,12 @@
     {{ $max_width = 53}}
 {{ end }}
 
-{{ $caption := .caption}}
-
 <div class="pic-grid" style="width: {{ $max_width }}%">
     <div class="pure-g">
-        {{ range $num, $a := .pic_set }}
+        {{ range $num, $a := $pic_set }}
+        {{ if resources.Get $a }}
+            {{ $a = (resources.Get $a).Permalink }}
+        {{ end }}
         <div class="pure-u-1-{{ $num_per_row }}">
             <div class="add-padding">
                 <div class="img-container">
