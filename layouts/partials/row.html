@@ -101,7 +101,11 @@
 
                     {{ if (eq (len $pictures_set) 1) }}
                         {{ range $pictures_set }}
-                            <img src="{{ . }}" class="single-pic" alt="Responsive image" data-fancybox="gallery" data-caption={{ $picture_caption }}></img>
+                            {{ $src := . }}
+                            {{ if resources.Get $src }}
+                                {{ $src = (resources.Get $src).Permalink }}
+                            {{ end }}
+                            <img src="{{ $src }}" class="single-pic" alt="Responsive image" data-fancybox="gallery" data-caption={{ $picture_caption }}></img>
                         {{ end }}
                     {{ end }}
 
@@ -111,6 +115,10 @@
 
                     {{/* Probably DEPRECATED in the future: single picture (old version API `pic`)*/}}
                     {{ with $page.Params.pic }}
+                        {{ $src := . }}
+                        {{ if resources.Get $src }}
+                            {{ $src = (resources.Get $src).Permalink }}
+                        {{ end }}
                         <img src="{{ . }}" class="single-pic" alt="Responsive image" data-fancybox="gallery" data-caption={{ $picture_caption }}></img>
                     {{ end }}
 
