@@ -2,32 +2,32 @@
 {{/* PART 1 default link */}}
 {{ $resource_type := "link" }}
 
-{{ $logo_file := "default_link_logo.png" }}
+{{ $logo_file := "link-logos/default_link_logo.png" }}
 {{ $index := .index | safeJS }}
 
 {{/* 1.1 Wechat articles */}}
 {{ if eq 1 (len (findRE `(https?://)?mp\.weixin\.qq\.com([-a-zA-Z0-9()@:%\+.~#?&/=_]*)` .a)) }}
-    {{ $logo_file = "wechat.png"}}
+    {{ $logo_file = "link-logos/wechat.png"}}
 {{ end }}
 
 {{/* 1.2 Bilibili webpage */}}
 {{ if eq 1 (len (findRE `(https?://)?(www\.)?bilibili\.com/video/([-a-zA-Z0-9()@:%\+.~#?&/=_]*)` .a)) }}
-    {{ $logo_file = "bilibili.png"}}
+    {{ $logo_file = "link-logos/bilibili.png"}}
 {{ end }}
 
 {{/* 1.3 github repo */}}
 {{ if eq 1 (len (findRE `(https?://)?(www\.)?github\.com([-a-zA-Z0-9()@:%\+.~#?&/=_]*)` .a)) }}
-    {{ $logo_file = "github.png"}}
+    {{ $logo_file = "link-logos/github.png"}}
 {{ end }}
 
 {{/* 1.4.1 zhihu answers */}}
 {{ if eq 1 (len (findRE `(https?://)?(www\.)?zhihu\.com/question/([0-9]*)/answer/[0-9]*` .a)) }}
-    {{ $logo_file = "zhihu.svg"}}
+    {{ $logo_file = "link-logos/zhihu.svg"}}
 {{ end }}
 
 {{/* 1.4.2 zhihu articles */}}
 {{ if eq 1 (len (findRE `(https?://)?zhuanlan\.zhihu\.com/p/([0-9]*)` .a)) }}
-    {{ $logo_file = "zhihu.svg"}}
+    {{ $logo_file = "link-logos/zhihu.svg"}}
 {{ end }}
 
 {{/* PART 2 other link type */}}
@@ -65,12 +65,13 @@
     <table class="link-table">
     <tr>
         <td>
-            {{ $baseurl := .baseurl}}
             {{ with .logo }}
-            <img src="{{ . }}" class="link-logo">
-            {{ else }}
-            <img src="{{ $baseurl }}/link-logos/{{ $logo_file }}" class="link-logo">
+                {{ $logo_file = . }}
             {{ end }}
+            {{ if resources.Get $logo_file }}
+                {{ $logo_file = (resources.Get $logo_file).Permalink }}
+            {{ end }}
+            <img src="{{ $logo_file }}" class="link-logo">
         </td>
         <td style="padding-left: 20px">
             <a href="{{ .a }}" target="_blank" rel="noopener noreferrer">{{.word}}</a>
