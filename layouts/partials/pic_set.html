@@ -11,18 +11,30 @@
 <div class="pic-grid" style="width: {{ $max_width }}%">
     <div class="pure-g">
         {{ range $num, $a := $pic_set }}
-        {{ if resources.Get $a }}
-            {{ $a = (resources.Get $a).Permalink }}
-        {{ end }}
-        <div class="pure-u-1-{{ $num_per_row }}">
-            <div class="add-padding">
-                <div class="img-container">
-                    <a data-src="{{ $a }}" data-fancybox="gallery" data-caption="{{ $caption }}">
-                        <img src="{{ $a }}" alt="pictures"/>
-                    </a>
+            {{ if resources.Get $a }}
+                {{ $a = (resources.Get $a).Permalink }}
+            {{ end }}
+
+            {{ $display := "block"}}
+            {{ if gt $num 8 }} {{ $display = "none"}} {{ end }}
+            <div class="pure-u-1-{{ $num_per_row }}" style="display: {{$display}};">
+                <div class="add-padding">
+                    {{ if and (eq $num 8) (gt (len $pic_set) 9) }}
+                        <div class="img-container img-black-filter">
+                            <a data-src="{{ $a }}" data-fancybox="gallery" data-caption="{{ $caption }}">
+                                <div class="more-icon" style="background-image: url('{{ (resources.Get "more-icon.png").Permalink }}');"></div>
+                                <img src="{{ $a }}" alt="pictures"/>
+                            </a>
+                        </div>
+                    {{ else }}
+                        <div class="img-container">
+                            <a data-src="{{ $a }}" data-fancybox="gallery" data-caption="{{ $caption }}">
+                                <img src="{{ $a }}" alt="pictures"/>
+                            </a>
+                        </div>
+                    {{ end }}
                 </div>
             </div>
-        </div>
         {{ end }}
     </div>
 </div>
