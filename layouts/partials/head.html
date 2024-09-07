@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-{{/* 
+{{/*
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
@@ -14,35 +14,45 @@
 <script src="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
 <!-- favicon -->
-<link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
-<link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png">
-<link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">
-<link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">
-<link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
-<link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
-<link rel="icon" type="image/png" sizes="192x192"  href="/favicon/android-icon-192x192.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
-<link rel="manifest" href="/favicon/manifest.json">
+<link rel="apple-touch-icon" sizes="57x57" href="{{ (resources.Get "favicon/apple-icon-57x57.png").Permalink }}">
+<link rel="apple-touch-icon" sizes="60x60" href="{{ (resources.Get "favicon/apple-icon-60x60.png").Permalink }}">
+<link rel="apple-touch-icon" sizes="72x72" href="{{ (resources.Get "favicon/apple-icon-72x72.png").Permalink }}">
+<link rel="apple-touch-icon" sizes="76x76" href="{{ (resources.Get "favicon/apple-icon-76x76.png").Permalink }}">
+<link rel="apple-touch-icon" sizes="114x114" href="{{ (resources.Get "favicon/apple-icon-114x114.png").Permalink }}">
+<link rel="apple-touch-icon" sizes="120x120" href="{{ (resources.Get "favicon/apple-icon-120x120.png").Permalink }}">
+<link rel="apple-touch-icon" sizes="144x144" href="{{ (resources.Get "favicon/apple-icon-144x144.png").Permalink }}">
+<link rel="apple-touch-icon" sizes="152x152" href="{{ (resources.Get "favicon/apple-icon-152x152.png").Permalink }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ (resources.Get "favicon/apple-icon-180x180.png").Permalink }}">
+<link rel="icon" type="image/png" sizes="192x192"  href="{{ (resources.Get "favicon/android-icon-192x192.png").Permalink }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ (resources.Get "favicon/favicon-32x32.png").Permalink }}">
+<link rel="icon" type="image/png" sizes="96x96" href="{{ (resources.Get "favicon/favicon-96x96.png").Permalink }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ (resources.Get "favicon/favicon-16x16.png").Permalink }}">
+<link rel="manifest" href="{{ (resources.Get "favicon/manifest.json").Permalink }}">
 <meta name="msapplication-TileColor" content="#ffffff">
-<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="msapplication-TileImage" content="{{ (resources.Get "favicon/ms-icon-144x144.png").Permalink }}">
 <meta name="theme-color" content="#ffffff">
 
 <!-- the Moments style css file -->
 {{ $style := resources.Get "style-refractored.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
 <link rel="stylesheet" href="{{ $style.Permalink }}">
+{{ $style_2 := resources.Get "audio.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
+<link rel="stylesheet" href="{{ $style_2.Permalink }}">
 
 <!-- fancybox css (js in the end before the body closing tag) -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"/>
+
+<!-- videojs -->
+<link href="https://vjs.zencdn.net/8.6.1/video-js.css" rel="stylesheet" />
 
 <!-- pure.css -->
 <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/base-min.css">
 <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/grids-min.css">
 <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/grids-responsive-min.css">
+
+<!-- CSS for loading animation -->
+{{ if .Site.Params.infiniteScroll }}
+<link rel="stylesheet" href="/style/loading.css">
+{{ end }}
 
 {{/* pangu support: js in the end before the body closing tag */}}
 {{ if .Site.Params.features.pangu }}
@@ -50,6 +60,19 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js"></script>
 {{ end }}
 
+{{ if $.Site.Params.experimental.comment }}
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+{{ end }}
+
+{{ if .Site.Params.features.heti }}
+<link rel="stylesheet" href="/style/heti.min.css">
+<script src="/scripts/heti-addon.min.js"></script>
+{{ end }}
+
+
+{{/* audio file play */}}
+<script src="/scripts/audio-play.js"></script>
+
 <!-- website title -->
 <title>{{ .Site.Params.title }}</title>
-

@@ -1,22 +1,23 @@
+{{ $page := .page }}
+{{ $index := .index }}
 <div class="moment-row">
 
     <div class="pure-g">
 
         {{/* time info shown in the left (or above in small screens) */}}
-        <div class="pure-u-1 pure-u-sm-1-3">
+        <div class="pure-u-1 pure-u-sm-1-4">
             <div class="time">
-                <div class="month-day">{{ .Date.Format "Jan 2"}}{{ if in (slice 1 21 31) .Date.Day}}st{{ else if in (slice 2 22)
-                    .Date.Day}}nd{{ else if in (slice 3 23) .Date.Day}}rd{{ else }}th{{ end }}</div>
-                <div class="year">{{ .Date.Format "2006"}}</div>
+                <div class="month-day">{{ $page.Date.Format "Jan 2"}}{{ if in (slice 1 21 31) $page.Date.Day}}st{{ else if in (slice 2 22) $page.Date.Day}}nd{{ else if in (slice 3 23) $page.Date.Day}}rd{{ else }}th{{ end }}</div>
+                <div class="year">{{ $page.Date.Format "2006"}}</div>
             </div>
         </div>
 
         {{/* moment-main-content */}}
-        <div class="pure-u-1 pure-u-sm-2-3">
+        <div class="pure-u-1 pure-u-sm-3-4">
             <div class="moment-content">
                 {{/* top mark */}}
-                {{ if gt .Params.top 0}}
-                <div class="top-mark" style="position: absolute; right: 5%;">
+                {{ if gt $page.Params.top 0}}
+                <div class="top-mark">
                     <i class="fas fa-bookmark" style="color: #e76b4f;"></i>
                 </div>
                 {{ end }}
@@ -24,46 +25,66 @@
                 {{/* user info */}}
                 <div class="user-info">
                     <div class="avatar-block">
-                        {{ with .Params.avatar }}
-                        <img src='{{ . }}' class="avatar">
-                        {{ else }}
-                        {{/* fixme check whether the default avatar path is url or not--> */}}
-                        <img src='{{ $.Site.BaseURL }}/{{ .Site.Params.avatar }}' class="avatar">
+                        {{ $avatar_path :=  "default-avatar.png" }}
+                        {{ with $page.Site.Params.avatar }}
+                            {{ $avatar_path = . }}
                         {{ end }}
+                        {{ with $page.Params.avatar }}
+                            {{ $avatar_path = . }}
+                        {{ end }}
+                        {{ if resources.Get $avatar_path }}
+                            {{ $avatar_path = (resources.Get $avatar_path).Permalink }}
+                        {{ end }}
+                        <img src='{{ $avatar_path }}' class="avatar">
                     </div>
                     <div class="intro">
-                        {{ with .Params.name }}
-                        <div class="name">{{ . }}</div>
+                        <div class="name">
+                        {{ with $page.Params.name }}
+                            {{ . }}
                         {{ else }}
-                        <div class="name">{{ .Site.Params.name }}</div>
+                            {{ $page.Site.Params.name }}
                         {{ end }}
-                        <div>
-                            {{ $tags_filtered := slice}}
-                            {{ with .Params.tags }}
-                                {{ range . }}
-                                    {{ with .}}
-                                    {{ $tags_filtered = $tags_filtered | append . }}
-                                    {{ end }}
-                                {{ end }}
-                            {{ end }}
-                            {{ with $tags_filtered }}
-                                {{ range . }}<span class="tag text-muted">{{ . }}</span>{{ end }}
-                            {{ end }}
+                        </div>
+
+                        <div class="moment-signature">
+                        {{ with $page.Params.signature }}
+                            {{ . }}
+                        {{ else }}
+                            发布了
+                        {{ end }}
                         </div>
                     </div>
                 </div>
 
-                <div style="padding-left: 5px; padding-right: 5px;">
+                <div class="main-context">
+                    {{/* tag */}}
+                    {{ $tags_filtered := slice }}
+                    {{ with $page.Params.tags }}
+                        {{ range . }}
+                            {{ with .}}
+                            {{ $tags_filtered = $tags_filtered | append . }}
+                            {{ end }}
+                        {{ end }}
+                    {{ end }}
+                    {{ with $tags_filtered }}
+                        <div class="tag-div">
+                            {{ range . }}
+                            <div class="new-tag">{{ trim . " " }}</div>
+                            {{ end }}
+                        </div>
+                    {{ end }}
+
+
                     {{/* Main text content */}}
-                    <div class="context">
-                        {{ .Content }}
+                    {{ if $page.Site.Params.features.heti }}<div class="context heti">{{ else }}<div class="context">{{ end }}
+                        {{ $page.Content }}
                     </div>
-                    
+
                     {{/* add-on info 1: pictures */}}
                     {{/* new pictures API `pictures` (combine single & multiple pictures)*/}}
                     {{ $pictures_set := slice}}
-                    {{ $picture_caption := .Plain}}
-                    {{ with .Params.pictures }}
+                    {{ $picture_caption := $page.Plain}}
+                    {{ with $page.Params.pictures }}
                         {{ range . }}
                             {{ with . }}
                                 {{ $pictures_set = $pictures_set | append . }}
@@ -71,24 +92,39 @@
                         {{ end }}
                     {{ end }}
 
+                    {{/* EXPERIMENTAL video support */}}
+                    {{ with $page.Params.video }}
+                    <video class="video-js" controls preload="auto" width="320" height="200" data-setup="{}" style="margin-bottom: 10px;">
+                        <source src="{{ . }}"/>
+                    </video>
+                    {{ end }}
+
                     {{ if (eq (len $pictures_set) 1) }}
                         {{ range $pictures_set }}
-                            <img src="{{ . }}" class="single-pic" alt="Responsive image" data-fancybox="gallery" data-caption={{ $picture_caption }}></img>
+                            {{ $src := . }}
+                            {{ if resources.Get $src }}
+                                {{ $src = (resources.Get $src).Permalink }}
+                            {{ end }}
+                            <img src="{{ $src }}" class="single-pic" alt="Responsive image" data-fancybox="gallery" data-caption={{ $picture_caption }}></img>
                         {{ end }}
                     {{ end }}
 
                     {{ if (gt (len $pictures_set) 1)}}
-                        {{ partial "pic_set.html" (dict "pic_set" $pictures_set "other" $.Site.BaseURL "caption" $picture_caption) }}
+                        {{ partial "pic_set.html" (dict "pic_set" $pictures_set "other" $page.Site.BaseURL "caption" $picture_caption) }}
                     {{ end }}
 
                     {{/* Probably DEPRECATED in the future: single picture (old version API `pic`)*/}}
-                    {{ with .Params.pic }}
+                    {{ with $page.Params.pic }}
+                        {{ $src := . }}
+                        {{ if resources.Get $src }}
+                            {{ $src = (resources.Get $src).Permalink }}
+                        {{ end }}
                         <img src="{{ . }}" class="single-pic" alt="Responsive image" data-fancybox="gallery" data-caption={{ $picture_caption }}></img>
                     {{ end }}
 
                     {{/* Probably DEPRECATED in the future: multiple pictures (old version API `pic_set`) */}}
                     {{ $pic_set_filtered := slice}}
-                    {{ with .Params.pic_set }}
+                    {{ with $page.Params.pic_set }}
                         {{ range . }}
                             {{ with . }}
                             {{ $pic_set_filtered = $pic_set_filtered | append . }}
@@ -102,21 +138,45 @@
 
 
                     {{/* add-on info 2: hyperlink to other resourse (e.g webpage, Netease music, Bilibili Video) */}}
-                    {{ $link_link := .Params.link }}
-                    {{ $link_logo := .Params.link_logo }}
-                    {{ $link_text := .Params.link_text }}
+                    {{ $link_link := $page.Params.link }}
+                    {{ $link_logo := $page.Params.link_logo }}
+                    {{ $link_text := $page.Params.link_text }}
 
-                    {{ with .Params.link }}
+                    {{ with $page.Params.link }}
                         {{ partial "link-block.html" (dict "logo" $link_logo "a" $link_link "word" $link_text "baseurl"
-                        $.Site.BaseURL)}}
+                        $page.Site.BaseURL "index" $index) }}
                     {{ end }}
 
                     {{/* Note info shown below the main content */}}
                     <div class="moment-note">
-                        <p class="note">{{ .Date.Format "15:04" }} {{ .Params.note }}</p>
-                        <div style="padding-right: 12px;"><i class="far fa-heart"></i></div>
+                        <p class="note"><span class="note-time">{{ $page.Date.Format "15:04" }}</span><span class="note-context">{{ $page.Params.note }}</span></p>
+                        <div class="buttons" style="display: flex;">
+                            {{ if $page.Site.Params.experimental.comment }}<div class="comment-btn" id="comment-btn-{{ $index }}"><i class="far fa-comment"></i></div>{{ end }}
+                            <div class="like-btn"><i class="far fa-heart"></i></div>
+                        </div>
                     </div>
 
+                    {{ if $page.Site.Params.experimental.comment }}
+                    <div id="row-comment-{{ $index }}" style="display: none;">
+                        <div id="gitalk-container-{{ $index }}"></div>
+                    </div>
+                    <script type="text/javascript">
+                        var gitalk = new Gitalk({
+                            clientID: 'GitHub Application Client ID',
+                            clientSecret: 'GitHub Application Client Secret',
+                            repo: 'GitHub repo',
+                            owner: 'GitHub repo owner',
+                            admin: ['GitHub repo owner and collaborators, only these guys can initialize github issues'],
+                            id: '{{ $page.File }}',      // Ensure uniqueness and length less than 50
+                            distractionFreeMode: false  // Facebook-like distraction free mode
+                        })
+
+                        $("#comment-btn-{{ $index }}").on('click', function(){
+                            $("#row-comment-{{ $index }}").slideToggle("slow");
+                            gitalk.render('gitalk-container-{{ $index }}')
+                        });
+                    </script>
+                    {{ end }}
                 </div>
 
                 <hr class="seperating_line">

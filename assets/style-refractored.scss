@@ -15,7 +15,66 @@ body{
     font-size: 16px;
     line-height: 24px;
     color: rgb(33, 37, 41);
+
+    code {
+        font-family: ui-monospace, "Cascadia Mono", "Segoe UI Mono", "Liberation Mono", Menlo, Monaco, Consolas, "Microsoft YaHei", monospace;
+    }
+
+    :not(pre) > code {
+        font-size: 14px;
+        background-color: #e3e6e8;
+        padding: 2px 4px;
+        border-radius: 3px;
+    }
+
+    .highlight {
+        padding: 0;
+        width: 100%;
+        font-size: 13px;
+        margin-bottom: 16px;
+        overflow-x: auto;
+
+        pre {
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    blockquote {
+        position: relative;
+        overflow: hidden;
+        margin: 0 16px 16px 16px;
+        padding: 16px 0 0 16px;
+        color: #525960;
+
+        &::before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 4px;
+            border-radius: 2px;
+            background: #c8ccd0;
+        }
+
+        mark { // fix color for mark inside blockquote
+            color: inherit;
+        }
+    }
+
+    overflow-wrap: break-word;
+
+    summary {
+        margin-bottom: 4px;
+    }
+
+    details {
+        margin-bottom: 16px;
+    }
 }
+
 
 .page{
     max-width: 1150px;
@@ -30,6 +89,11 @@ body{
 
 .moment-content{
     position: relative;
+
+    .top-mark {
+        position: absolute;
+        right: 0%;
+    }
 }
 
 .moment-row{
@@ -48,8 +112,8 @@ body{
     }
 
     .container{
-        padding-left: 10px;
-        padding-right: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
     }
 }
 
@@ -123,7 +187,7 @@ $gray: #919EB1;
 /* START - time */
 .time{
     text-align: right;
-    padding-right: 60px;
+    padding-right: 80px;
     /* white-space: nowrap; */
     font-weight: 300;
     margin-bottom: 20px;
@@ -145,7 +209,7 @@ $gray: #919EB1;
 }
 @media (max-width: 720px) and (min-width:576px){
     .time{
-        padding-right: 20px;
+        padding-right: 40px;
     }
 }
 /* END - time */
@@ -158,7 +222,7 @@ $gray: #919EB1;
     .avatar{
         max-height: 45px;
         float: left;
-        margin-bottom: 10px;
+        margin-right: 5px;
     }
 
     .intro{
@@ -172,18 +236,19 @@ $gray: #919EB1;
             font-size: 24px;
         }
 
-        .tag{
+        div:nth-child(2) {
+            word-break: break-all;
+            line-height: 18px;
+        }
+
+        .moment-signature{
             font-size: 80%;
-            margin-left: 0px;
-            margin-right: 10px;
             color: #6c757d!important;
-        
-            &::before{
-                content:"#";
-                padding-right: 1px;
-            }
+            white-space: nowrap;
         }
     }
+
+    margin-bottom: 24px;
 }
 /* END - user name, avatar & tags */
 
@@ -192,6 +257,87 @@ $gray: #919EB1;
 .context{
     clear: left;
     margin-bottom: 10px;
+
+    a {
+        text-decoration: none;
+        color: #0059b3;
+        &:visited {
+            color: #0059b3;
+        }
+        &::after {
+            padding-left: 3px;
+
+            font-family: "Font Awesome 5 Free"; 
+            content: "\f35d";
+            font-weight: 900; 
+            display: inline-block;
+            font-style: normal;
+            font-variant: normal;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+        }
+    }
+
+    // ordered & unordered list style
+
+    ol li {
+        padding-left: 5px;
+
+        &::marker {
+            color: #919EB1;
+        }
+    }
+
+    ul li {
+        padding-left: 5px;
+
+        &::marker {
+            color: #919EB1;
+        }
+    }
+}
+
+.tag-div {
+    display: -webkit-flex;
+    display: flex;   
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    margin-bottom: 10px;
+    .new-tag {
+        line-height: 30px;
+        padding-left: 20px;
+        padding-right: 15px;
+        margin-right: 10px;
+        margin-bottom: 5px;
+        
+		border-radius: 15px;
+
+        background-color: #EDEDED;
+        color: #132939;
+
+        text-indent: -10px;
+        font-size: 90%;
+        white-space: nowrap;
+
+        &::before{
+            content:"#";
+            text-align: center;
+
+            background-color: #8EA1B0;
+            color: #ffffff;
+
+            padding-top: 1px;
+            padding-bottom: 1px;
+            padding-left: 6px;
+            padding-right: 6px;
+		    border-radius: 12px;
+
+            margin-right: 6px;
+
+            font-size: 110%;
+        }
+    }
 }
 
 .single-pic{
@@ -199,6 +345,10 @@ $gray: #919EB1;
     max-height: 250px;
     padding-bottom:10px;
     margin-top: 5px; 
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 // pic set
@@ -210,6 +360,29 @@ $gray: #919EB1;
         padding-bottom: 50%;
         position: relative;
         height: 0px;
+        
+        &.img-black-filter::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+            background-color: rgb(0, 0, 0);
+            opacity: 0.8;
+        }
+
+        .more-icon {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+
+            background-size: 100% 100%;
+            z-index: 1;
+        }
     }
 
     img{
@@ -223,10 +396,17 @@ $gray: #919EB1;
     .add-padding{
         padding: 2.5px;
     }
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 /* for links */
 .share-link-block{
+    max-width: 420px;
+    margin: auto;
+
     padding-bottom:10px; 
     padding-top:10px; 
     margin-bottom:10px;
@@ -270,16 +450,36 @@ $gray: #919EB1;
     display: flex;
     margin-bottom: 10px;
     justify-content: space-between;
-    margin-right: 5px; 
     color:#808080;
 
     .note{
         font-size: 80%;
-        text-indent: 20px;
         color: rgba(0, 0, 0, 0.5);
     
         margin-top: 0;
         margin-bottom: 0;
+
+
+        .note-time {
+            padding-right: 15px;
+        }
+    }
+}
+
+// note at the bottom of each row
+.moment-note {
+    .like-btn {
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .comment-btn {
+        padding-right: 10px;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 }
 
@@ -289,7 +489,6 @@ hr {
     border-width: 0;
     border-top: 1px solid;
     border-color: rgba(0, 0, 0, 0.1);
-    max-width: 75%;
     clear: both
 }
 /* END - for the main content */
@@ -325,7 +524,7 @@ hr {
     outline: none;
 
     background-color: #d1d1d1; /* Set a background color */
-    color: #2157ad; /* Text color */
+    color: #3a6ba5; /* Text color */
 
     opacity: 0.85;
 

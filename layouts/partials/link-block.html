@@ -2,31 +2,32 @@
 {{/* PART 1 default link */}}
 {{ $resource_type := "link" }}
 
-{{ $logo_file := "default_link_logo.png" }}
+{{ $logo_file := "link-logos/default_link_logo.png" }}
+{{ $index := .index | safeJS }}
 
 {{/* 1.1 Wechat articles */}}
 {{ if eq 1 (len (findRE `(https?://)?mp\.weixin\.qq\.com([-a-zA-Z0-9()@:%\+.~#?&/=_]*)` .a)) }}
-    {{ $logo_file = "wechat.png"}}
+    {{ $logo_file = "link-logos/wechat.png"}}
 {{ end }}
 
 {{/* 1.2 Bilibili webpage */}}
 {{ if eq 1 (len (findRE `(https?://)?(www\.)?bilibili\.com/video/([-a-zA-Z0-9()@:%\+.~#?&/=_]*)` .a)) }}
-    {{ $logo_file = "bilibili.png"}}
+    {{ $logo_file = "link-logos/bilibili.png"}}
 {{ end }}
 
 {{/* 1.3 github repo */}}
 {{ if eq 1 (len (findRE `(https?://)?(www\.)?github\.com([-a-zA-Z0-9()@:%\+.~#?&/=_]*)` .a)) }}
-    {{ $logo_file = "github.png"}}
+    {{ $logo_file = "link-logos/github.png"}}
 {{ end }}
 
 {{/* 1.4.1 zhihu answers */}}
 {{ if eq 1 (len (findRE `(https?://)?(www\.)?zhihu\.com/question/([0-9]*)/answer/[0-9]*` .a)) }}
-    {{ $logo_file = "zhihu.svg"}}
+    {{ $logo_file = "link-logos/zhihu.svg"}}
 {{ end }}
 
 {{/* 1.4.2 zhihu articles */}}
 {{ if eq 1 (len (findRE `(https?://)?zhuanlan\.zhihu\.com/p/([0-9]*)` .a)) }}
-    {{ $logo_file = "zhihu.svg"}}
+    {{ $logo_file = "link-logos/zhihu.svg"}}
 {{ end }}
 
 {{/* PART 2 other link type */}}
@@ -49,6 +50,14 @@
     {{ $bilibili_video_url = replaceRE `<iframe src="(//player\.bilibili.com/player\.html\?aid=.*&bvid=.*&cid=.*&page=1)" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>` "$1" .a }}
 {{ end }}
 
+
+{{/* 2.3 audio/music support */}}
+{{ if eq 1 (len (findRE `.*\.(mp3|MP3|flac|FLAC|wav|WAV)` .a)) }}
+    {{ $resource_type = "audio_file" }}
+    {{ $audio_file_url := .a }}
+{{ end }}
+
+
 {{/* BEGIN generate output */}}
 {{/* PART 1 default link */}}
 {{ if eq "link" $resource_type }}
@@ -56,12 +65,13 @@
     <table class="link-table">
     <tr>
         <td>
-            {{ $baseurl := .baseurl}}
             {{ with .logo }}
-            <img src="{{ . }}" class="link-logo">
-            {{ else }}
-            <img src="{{ $baseurl }}/link-logos/{{ $logo_file }}" class="link-logo">
+                {{ $logo_file = . }}
             {{ end }}
+            {{ if resources.Get $logo_file }}
+                {{ $logo_file = (resources.Get $logo_file).Permalink }}
+            {{ end }}
+            <img src="{{ $logo_file }}" class="link-logo">
         </td>
         <td style="padding-left: 20px">
             <a href="{{ .a }}" target="_blank" rel="noopener noreferrer">{{.word}}</a>
@@ -84,3 +94,47 @@
     <iframe src="{{ $bilibili_video_url }}" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
 </div>
 {{ end }}
+
+
+{{/* audio/music support */}}
+{{ if eq "audio_file" $resource_type }}
+
+<div class="audio-player">
+    <div class="left_part">
+        <div class="music_title">{{ .word }}</div>
+        <div class="music_duration">
+            <span id="currentTime_{{ $index }}">00 : 00</span>
+            <span id="duration_{{ $index }}">00 : 00</span>
+        </div>
+        <div class="music_progress" id="playerProgress_{{ $index }}">
+            <div class="progress_inplay" id="progress_{{ $index }}"></div>
+        </div>
+    </div>
+
+    <div class="right_part">
+        <div class="player_controls">
+            <i class="fas fa-play play-button" id="playBtn_{{ $index }}"></i>
+        </div>
+    </div>
+</div>
+
+<script>
+    let song_{{ $index }} = new Audio();
+    song_{{ $index }}.src = "{{ .a }}";
+
+    let playerProgress_{{ $index }} = document.getElementById("playerProgress_{{ $index }}");
+    let progress_{{ $index }} = document.getElementById("progress_{{ $index }}");
+    let currentTime_{{ $index }} = document.getElementById("currentTime_{{ $index }}");
+    let duration_{{ $index }} = document.getElementById("duration_{{ $index }}");
+    let playBtn_{{ $index }} = document.getElementById("playBtn_{{ $index }}");
+
+    song_{{ $index }}.addEventListener("ended", () => togglePlay(song_{{ $index }}, progress_{{ $index }}));
+    song_{{ $index }}.addEventListener("timeupdate", () => updateProgressBar(progress_{{ $index }}, duration_{{ $index }}, currentTime_{{ $index }}, song_{{ $index }}));
+
+    playerProgress_{{ $index }}.addEventListener("click", e => setProgressBar(e, playerProgress_{{ $index }}, song_{{ $index }}));
+    playBtn_{{ $index }}.addEventListener("click", () => togglePlay(song_{{ $index }}, playBtn_{{ $index }}));
+</script>
+
+{{ end }}
+
+
