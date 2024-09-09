@@ -14,29 +14,29 @@
 <script src="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
 <!-- favicon -->
-<link rel="apple-touch-icon" sizes="57x57" href="{{ (resources.Get "favicon/apple-icon-57x57.png").Permalink }}">
-<link rel="apple-touch-icon" sizes="60x60" href="{{ (resources.Get "favicon/apple-icon-60x60.png").Permalink }}">
-<link rel="apple-touch-icon" sizes="72x72" href="{{ (resources.Get "favicon/apple-icon-72x72.png").Permalink }}">
-<link rel="apple-touch-icon" sizes="76x76" href="{{ (resources.Get "favicon/apple-icon-76x76.png").Permalink }}">
-<link rel="apple-touch-icon" sizes="114x114" href="{{ (resources.Get "favicon/apple-icon-114x114.png").Permalink }}">
-<link rel="apple-touch-icon" sizes="120x120" href="{{ (resources.Get "favicon/apple-icon-120x120.png").Permalink }}">
-<link rel="apple-touch-icon" sizes="144x144" href="{{ (resources.Get "favicon/apple-icon-144x144.png").Permalink }}">
-<link rel="apple-touch-icon" sizes="152x152" href="{{ (resources.Get "favicon/apple-icon-152x152.png").Permalink }}">
-<link rel="apple-touch-icon" sizes="180x180" href="{{ (resources.Get "favicon/apple-icon-180x180.png").Permalink }}">
-<link rel="icon" type="image/png" sizes="192x192"  href="{{ (resources.Get "favicon/android-icon-192x192.png").Permalink }}">
-<link rel="icon" type="image/png" sizes="32x32" href="{{ (resources.Get "favicon/favicon-32x32.png").Permalink }}">
-<link rel="icon" type="image/png" sizes="96x96" href="{{ (resources.Get "favicon/favicon-96x96.png").Permalink }}">
-<link rel="icon" type="image/png" sizes="16x16" href="{{ (resources.Get "favicon/favicon-16x16.png").Permalink }}">
-<link rel="manifest" href="{{ (resources.Get "favicon/manifest.json").Permalink }}">
+<link rel="apple-touch-icon" sizes="57x57" href="{{ (resources.Get "favicon/apple-icon-57x57.png").RelPermalink }}">
+<link rel="apple-touch-icon" sizes="60x60" href="{{ (resources.Get "favicon/apple-icon-60x60.png").RelPermalink }}">
+<link rel="apple-touch-icon" sizes="72x72" href="{{ (resources.Get "favicon/apple-icon-72x72.png").RelPermalink }}">
+<link rel="apple-touch-icon" sizes="76x76" href="{{ (resources.Get "favicon/apple-icon-76x76.png").RelPermalink }}">
+<link rel="apple-touch-icon" sizes="114x114" href="{{ (resources.Get "favicon/apple-icon-114x114.png").RelPermalink }}">
+<link rel="apple-touch-icon" sizes="120x120" href="{{ (resources.Get "favicon/apple-icon-120x120.png").RelPermalink }}">
+<link rel="apple-touch-icon" sizes="144x144" href="{{ (resources.Get "favicon/apple-icon-144x144.png").RelPermalink }}">
+<link rel="apple-touch-icon" sizes="152x152" href="{{ (resources.Get "favicon/apple-icon-152x152.png").RelPermalink }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ (resources.Get "favicon/apple-icon-180x180.png").RelPermalink }}">
+<link rel="icon" type="image/png" sizes="192x192"  href="{{ (resources.Get "favicon/android-icon-192x192.png").RelPermalink }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ (resources.Get "favicon/favicon-32x32.png").RelPermalink }}">
+<link rel="icon" type="image/png" sizes="96x96" href="{{ (resources.Get "favicon/favicon-96x96.png").RelPermalink }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ (resources.Get "favicon/favicon-16x16.png").RelPermalink }}">
+<link rel="manifest" href="{{ (resources.Get "favicon/manifest.json").RelPermalink }}">
 <meta name="msapplication-TileColor" content="#ffffff">
-<meta name="msapplication-TileImage" content="{{ (resources.Get "favicon/ms-icon-144x144.png").Permalink }}">
+<meta name="msapplication-TileImage" content="{{ (resources.Get "favicon/ms-icon-144x144.png").RelPermalink }}">
 <meta name="theme-color" content="#ffffff">
 
 <!-- the Moments style css file -->
 {{ $style := resources.Get "style-refractored.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
-<link rel="stylesheet" href="{{ $style.Permalink }}">
+<link rel="stylesheet" href="{{ $style.RelPermalink }}">
 {{ $style_2 := resources.Get "audio.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
-<link rel="stylesheet" href="{{ $style_2.Permalink }}">
+<link rel="stylesheet" href="{{ $style_2.RelPermalink }}">
 
 <!-- fancybox css (js in the end before the body closing tag) -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"/>
