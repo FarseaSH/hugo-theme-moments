@@ -3,7 +3,7 @@
     {{ $background_path = . }}
 {{ end }}
 {{ if resources.Get $background_path }}
-    {{ $background_path = (resources.Get $background_path).Permalink }}
+    {{ $background_path = (resources.Get $background_path).RelPermalink }}
 {{ end }}
 <div class="jumbotron" style="background-image: url({{ $background_path }});">
     <div class="container">

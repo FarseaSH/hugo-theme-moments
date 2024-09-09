@@ -33,7 +33,7 @@
                             {{ $avatar_path = . }}
                         {{ end }}
                         {{ if resources.Get $avatar_path }}
-                            {{ $avatar_path = (resources.Get $avatar_path).Permalink }}
+                            {{ $avatar_path = (resources.Get $avatar_path).RelPermalink }}
                         {{ end }}
                         <img src='{{ $avatar_path }}' class="avatar">
                     </div>
@@ -103,7 +103,7 @@
                         {{ range $pictures_set }}
                             {{ $src := . }}
                             {{ if resources.Get $src }}
-                                {{ $src = (resources.Get $src).Permalink }}
+                                {{ $src = (resources.Get $src).RelPermalink }}
                             {{ end }}
                             <img src="{{ $src }}" class="single-pic" alt="Responsive image" data-fancybox="gallery" data-caption={{ $picture_caption }}></img>
                         {{ end }}
@@ -117,7 +117,7 @@
                     {{ with $page.Params.pic }}
                         {{ $src := . }}
                         {{ if resources.Get $src }}
-                            {{ $src = (resources.Get $src).Permalink }}
+                            {{ $src = (resources.Get $src).RelPermalink }}
                         {{ end }}
                         <img src="{{ . }}" class="single-pic" alt="Responsive image" data-fancybox="gallery" data-caption={{ $picture_caption }}></img>
                     {{ end }}

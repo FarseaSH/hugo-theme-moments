@@ -69,7 +69,7 @@
                 {{ $logo_file = . }}
             {{ end }}
             {{ if resources.Get $logo_file }}
-                {{ $logo_file = (resources.Get $logo_file).Permalink }}
+                {{ $logo_file = (resources.Get $logo_file).RelPermalink }}
             {{ end }}
             <img src="{{ $logo_file }}" class="link-logo">
         </td>

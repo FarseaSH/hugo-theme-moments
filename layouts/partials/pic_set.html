@@ -12,7 +12,7 @@
     <div class="pure-g">
         {{ range $num, $a := $pic_set }}
             {{ if resources.Get $a }}
-                {{ $a = (resources.Get $a).Permalink }}
+                {{ $a = (resources.Get $a).RelPermalink }}
             {{ end }}
 
             {{ $display := "block"}}
@@ -22,7 +22,7 @@
                     {{ if and (eq $num 8) (gt (len $pic_set) 9) }}
                         <div class="img-container img-black-filter">
                             <a data-src="{{ $a }}" data-fancybox="gallery" data-caption="{{ $caption }}">
-                                <div class="more-icon" style="background-image: url('{{ (resources.Get "more-icon.png").Permalink }}');"></div>
+                                <div class="more-icon" style="background-image: url('{{ (resources.Get "more-icon.png").RelPermalink }}');"></div>
                                 <img src="{{ $a }}" alt="pictures"/>
                             </a>
                         </div>
