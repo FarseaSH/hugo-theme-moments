@@ -8,6 +8,9 @@
     {{ $max_width = 53}}
 {{ end }}
 
+{{/* Trim the caption length to the first 100 characters */}}
+{{ $caption = $caption | truncate 100 "..." }}
+
 <div class="pic-grid" style="width: {{ $max_width }}%">
     <div class="pure-g">
         {{ range $num, $a := $pic_set }}
