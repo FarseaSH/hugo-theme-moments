@@ -125,33 +125,36 @@ $ git clone https://github.com/FarseaSH/hugo-theme-moments.git themes/moments
 
 ### 第一次配置
 
-将以下设置覆盖到`config.toml`文件中
+将以下设置覆盖到`config.yaml`文件中
 
 ```
-baseURL = "https://YOUR-MOMENTS-PATH.com"
-languageCode = "zh-Hans"
-theme = "moments"
-paginate = 10
-paginatePath = '.'
+baseURL: https://YOUR-MOMENTS-PATH.com
+languageCode: zh-Hans
+theme: moments
+paginate: 10
+paginatePath: .
 
-[params]
-    title = "Moments Demo"
-    signature = "人生如逆旅，我亦是行人。"
-    name = "Default User"
+params:
+    title: "Moments Demo"
+    signature: "人生如逆旅，我亦是行人。"
+    cover: "default-background.png"
+
+    name: "Me"
+    avatar: "avatar.png"
 ```
 
 
-#### (Optional) config.toml 的配置
+#### (Optional) config.yaml 的配置
 
-修改对应配置文件`config.toml`中的参数，以满足你的要求。对于下面没有提及的参数，请不要修改。
+上面配置文件`config.yaml`中的参数，建议修改以下几项，以满足你的要求。
 
 - `baseURL`: 你所部署发布的网站地址。如果你的主页url是在域名子路径下（如 http://site.com/subpath/），请务必设定此项。
 - `paginate`: 单一页面上，显示的Moment的数量
 - `title`: 页面顶端的标题
-- `signature`: 页面顶端的签名
+- `signature`: 页面顶端的网站slogan/签名
 - `cover`: 页面顶端的封面图
-- `name`: Moment默认发布人
-- `avatar`: Moment默认发布人的头像
+- `name`: Moment默认发布者的名称
+- `avatar`: Moment默认发布者的头像(可以为http链接)
 
 ### 创建新的Moment
 
