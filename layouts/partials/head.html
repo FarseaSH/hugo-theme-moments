@@ -28,9 +28,9 @@
 <meta name="theme-color" content="#ffffff">
 
 <!-- the Moments style css file -->
-{{ $style := resources.Get "style-refractored.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
+{{ $style := resources.Get "style-refractored.scss" | css.Sass | resources.Minify | resources.Fingerprint }}
 <link rel="stylesheet" href="{{ $style.RelPermalink }}">
-{{ $style_2 := resources.Get "audio.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
+{{ $style_2 := resources.Get "audio.scss" | css.Sass | resources.Minify | resources.Fingerprint }}
 <link rel="stylesheet" href="{{ $style_2.RelPermalink }}">
 
 <!-- fancybox css (js in the end before the body closing tag) -->
