@@ -102,8 +102,11 @@
                     {{ if (eq (len $pictures_set) 1) }}
                         {{ range $pictures_set }}
                             {{ $src := . }}
-                            {{ if resources.Get $src }}
-                                {{ $src = (resources.Get $src).RelPermalink }}
+                            {{ if (not (strings.HasPrefix $src "http")) }}
+                            {{/* if src is a url, resources.Get may cause issues */}}
+                                {{ if resources.Get $src }}
+                                    {{ $src = (resources.Get $src).RelPermalink }}
+                                {{ end }}
                             {{ end }}
                             <img src="{{ $src }}" class="single-pic" alt="Responsive image" data-fancybox="gallery" data-caption={{ $picture_caption }}></img>
                         {{ end }}

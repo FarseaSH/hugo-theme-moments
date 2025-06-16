@@ -14,8 +14,11 @@
 <div class="pic-grid" style="width: {{ $max_width }}%">
     <div class="pure-g">
         {{ range $num, $a := $pic_set }}
-            {{ if resources.Get $a }}
-                {{ $a = (resources.Get $a).RelPermalink }}
+            {{ if (not (strings.HasPrefix $a "http")) }}
+            {{/* if $a is a url, resources.Get may cause issues */}}
+                {{ if resources.Get $a }}
+                    {{ $a = (resources.Get $a).RelPermalink }}
+                {{ end }}
             {{ end }}
 
             {{ $display := "block"}}
