@@ -131,8 +131,9 @@ $ git clone https://github.com/FarseaSH/hugo-theme-moments.git themes/moments
 baseURL: https://YOUR-MOMENTS-PATH.com
 languageCode: zh-Hans
 theme: moments
-paginate: 10
-paginatePath: .
+pagination:
+    path: .
+    pagerSize: 10
 
 params:
     title: "Moments Demo"
