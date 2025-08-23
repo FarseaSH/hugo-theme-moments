@@ -6,6 +6,7 @@ license = "MIT"
 licenselink = "https://github.com/FarseaSH/hugo-theme-moments/blob/master/LICENSE"
 description = "A Hugo theme for micro-blogging"
 homepage = "https://github.com/FarseaSH/hugo-theme-moments"
+demosite = "https://farseash.github.io/demo-hugo-theme-moments/demo/"
 tags = ["Responsive", "Gallery", "Micro-blogging"]
 features = ["Micro-blogging"]
 min_version = "0.85.0"
