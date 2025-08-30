@@ -34,30 +34,24 @@
             case 'pubDate':
                 return new Date(pubDate);
             default:
-                // 假设是标准日期格式 YYYY-MM-DD
+                // Assume standard date format YYYY-MM-DD
                 return new Date(dateStr);
         }
     }
     
     function getDaysDifference(date1, date2) {
-        // 创建新的Date对象，将时间部分设为00:00:00
+        // Create new Date objects with time set to 00:00:00
         const d1 = new Date(date1.getFullYear(), date1.getMonth(), date1.getDate());
         const d2 = new Date(date2.getFullYear(), date2.getMonth(), date2.getDate());
         
-        // 计算毫秒差，然后转换为天数
+        // Calculate millisecond difference, then convert to days
         const diffInMs = d2.getTime() - d1.getTime();
         return Math.floor(diffInMs / (1000 * 60 * 60 * 24));
     }
         
     function calculateDays() {
-        console.log(startDate)
         const startDateObj = parseDate(startDate);
         const endDateObj = parseDate(endDate);
-        console.log(startDateObj)
-        console.log(endDateObj)
-        // 计算天数差（向上取整，包含当天）
-        // const timeDiff = endDateObj.getDate() - startDateObj.getDate();
-        // const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
         const daysDiff = getDaysDifference(startDateObj, endDateObj);
         
         return {
@@ -87,24 +81,20 @@
 
     function adjustFontSize(element) {
         const container = element.parentElement;
-        const containerWidth = container.clientWidth - 20; // 减去padding
+        const containerWidth = container.clientWidth - 20; // Subtract padding
         
-
-        console.log(element.scrollWidth)
-        console.log(containerWidth)
-        
-        // 设置初始字体大小
+        // Set initial font size
         let fontSize = 120;
         element.style.fontSize = fontSize + 'px';
         
-        // 逐渐减小字体直到文字适合容器宽度
+        // Gradually decrease font size until text fits container width
         while (element.scrollWidth > containerWidth && fontSize > 80) {
             console.log(fontSize)
             fontSize -= 10;
             element.style.fontSize = fontSize + 'px';
         }
         
-        // 如果字体太小了，尝试增大
+        // If font is too small, try to increase it
         while (element.scrollWidth < containerWidth && fontSize < 24) {
             const testSize = fontSize + 0.5;
             element.style.fontSize = testSize + 'px';
@@ -127,24 +117,24 @@
         const titleElement = widget.querySelector('.countdown-title');
         const headerElement = widget.querySelector('.memorial-header');
         
-        // 更新天数显示
+        // Update days display
         counterElement.textContent = Math.abs(result.days);
         
-        // 更新标题和背景色：根据startDate和endDate的大小关系
+        // Update title and background color: based on the relationship between startDate and endDate
         let prefix = "";
         if (result.days >= 0) {
-            // startDate <= endDate：还有的逻辑
+            // startDate <= endDate: countdown logic
             titleElement.textContent = `距 ${title} 还有`;
             headerElement.classList.remove('past');
             prefix = '目标日';
         } else {
-            // startDate > endDate：已经的逻辑
+            // startDate > endDate: elapsed time logic
             titleElement.textContent = `距 ${title} 已经`;
             headerElement.classList.add('past');
             prefix = '起始日';
         }
         
-        // 更新日期信息
+        // Update date information
         const startInfo = formatDateInfo(startDate, result.startDateObj);
         const endInfo = formatDateInfo(endDate, result.endDateObj);
         
@@ -164,8 +154,7 @@
     }
     
     
-    
-    // DOM加载完成后执行
+    // Execute after DOM is loaded
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', updateDisplay);
     } else {
