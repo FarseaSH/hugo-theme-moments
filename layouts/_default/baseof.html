@@ -5,7 +5,9 @@
     </head>
     <body>
         <div class="page">
-            {{ partial "header.html" . }}
+            {{ block "header" . }}
+                {{ partial "header.html" (dict "link" $.Site.BaseURL "context" .)}}
+            {{ end }}
 
             {{ block "main" . }}
             {{ end }}

@@ -1,0 +1,14 @@
+{{ define "main" }}
+    <div class="container">
+        {{ $paginator := .Paginate (.Pages.ByParam "top") }}
+        {{ range $i, $page := $paginator.Pages }}
+            {{ partial "row.html" (dict "page" $page "index" $i) }}
+        {{ end }}
+    </div>
+{{ end }}
+
+
+{{ define "pagination" }}
+    {{ $paginator := .Paginate (.Pages.ByParam "top") }}
+    {{ partial "pagination.html" (dict "paginator" $paginator) }}
+{{ end }}

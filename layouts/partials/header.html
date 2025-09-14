@@ -7,7 +7,9 @@
 {{ end }}
 <div class="jumbotron" style="background-image: url({{ $background_path }});">
     <div class="container">
-        <div class="site-title">{{ .Site.Params.title }}</div>
-        <p class="signature">{{ .Site.Params.signature }}</p>
+        <div class="site-title">
+            <a href="{{ .link }}">{{ .context.Site.Params.title }}</a>
+        </div>
+        <p class="signature">{{ .context.Site.Params.signature }}</p>
     </div>
 </div>

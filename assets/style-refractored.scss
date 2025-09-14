@@ -132,11 +132,12 @@ p{
     text-align: center;
     margin-bottom: 30px;
 
-    .site-title{
+    .site-title a{
         color: rgb(108, 117, 125);
         font-size: 56px;
         font-weight: 300;
         margin-bottom: 20px;
+        text-decoration: none;
     }
     
     .signature{
