@@ -67,9 +67,65 @@
                         {{ end }}
                     {{ end }}
                     {{ with $tags_filtered }}
+                        {{/* Display tag section if there are filtered tags */}}
                         <div class="tag-div">
                             {{ range . }}
-                            <div class="new-tag">{{ trim . " " }}</div>
+                                {{ $tag := . }}
+                                
+                                {{/* 1 Access site's tag taxonomy to get tag counts */}}
+                                {{ $tag_count := 0 }}
+                                {{ $current_position := 0 }}
+                                {{ with $page.Site.Taxonomies.tags }}
+                                    {{/* Look up the specific tag using urlized format (URL-friendly) */}}
+                                    {{ with index . $tag }}
+                                        {{/* Count the number of pages with this tag */}}
+                                        {{ $tag_count = len . }}
+
+                                        {{/* Sort pages by date based on configuration */}}
+                                        {{ $sorted_pages := . }}
+                                        {{ if $page.Site.Params.tag.index.isOldFirst }}
+                                            {{/* Sort oldest first (ascending) */}}
+                                            {{ $sorted_pages = sort . "Date" }}
+                                        {{ else }}
+                                            {{/* Sort newest first (descending) */}}
+                                            {{ $sorted_pages = sort . "Date" "desc" }}
+                                        {{ end }}
+
+                                        {{ range $index, $tag_page := $sorted_pages }}
+                                            {{/* Check if this is the current page */}}
+                                            {{ if eq $tag_page.RelPermalink $page.RelPermalink }}
+                                                {{/* Position is index + 1 (since index starts at 0) */}}
+                                                {{ $current_position = add $index 1 }}
+                                            {{ end }}
+                                        {{ end }}
+
+                                    {{ end }}
+                                {{ end }}
+
+                                {{/* 2 Get the tag page URL */}}
+                                {{ $tag_url := "" }}
+                                {{ with $page.Site.GetPage (printf "/tags/%s" (urlize $tag)) }}
+                                    {{ $tag_url = .RelPermalink }}
+                                {{ end }}
+                                
+                                {{/* FINAL: Render the tag with conditional count display */}}
+                                {{/* Trim whitespace from tag name */}}
+                                {{ $trimmed_tag := trim . " " }}
+                                <a href="{{ $tag_url }}" class="new-tag-link">
+                                    <div class="new-tag">
+                                        {{ $trimmed_tag }}
+                                        {{/* Only show count if showTotalCount is enabled */}}
+                                        {{ if $page.Site.Params.tag.showTotalCount }}
+                                            <span class="new-tag-cnt">(
+                                                {{- if $page.Site.Params.tag.index.show -}}
+                                                    {{ $current_position }} / {{ $tag_count }}
+                                                {{- else -}}
+                                                    {{ $tag_count }}
+                                                {{- end -}}
+                                            )</span>
+                                        {{ end }}
+                                    </div>
+                                </a>
                             {{ end }}
                         </div>
                     {{ end }}
