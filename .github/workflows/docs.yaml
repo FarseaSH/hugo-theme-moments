@@ -1,4 +1,4 @@
-name: Deploy Docsify Docs
+name: Deploy Docsify Documentation
 
 on:
   push:
@@ -10,6 +10,10 @@ permissions:
   contents: read
   pages: write
   id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -26,10 +30,9 @@ jobs:
         uses: actions/configure-pages@v4
         
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3  # 最新版本
         with:
-          path: './docs'  # 指定您的 docsify 文档目录
-          
+          path: './docs'  # 您的 docsify 文档目录
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v3
+        uses: actions/deploy-pages@v4  # 最新版本
