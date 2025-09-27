@@ -5,6 +5,7 @@ on:
     branches: [ dev ]
     paths:
       - 'docs/**'
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -30,9 +31,10 @@ jobs:
         uses: actions/configure-pages@v4
         
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3  # 最新版本
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: './docs'  # 您的 docsify 文档目录
+          path: './docs'
+          
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4  # 最新版本
+        uses: actions/deploy-pages@v4
