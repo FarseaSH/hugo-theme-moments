@@ -1,5 +1,5 @@
 {{ $background_path :=  "default-background.png" }}
-{{ with .Site.Params.cover }}
+{{ with .context.Site.Params.cover }}
     {{ $background_path = . }}
 {{ end }}
 {{ if resources.Get $background_path }}
