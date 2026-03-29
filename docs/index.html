@@ -7,16 +7,23 @@
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-plugin-toc@1.3.2/dist/light.css">
 </head>
 <body>
   <div id="app"></div>
   <script>
     window.$docsify = {
-      name: '',
-      repo: ''
+      name: 'Moments Docs',
+      repo: '',
+      loadSidebar: true,
+      toc: {
+        tocMaxLevel: 4,
+        target: 'h2, h3, h4'
+      }
     }
   </script>
   <!-- Docsify v4 -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-plugin-toc@1.3.2/dist/docsify-plugin-toc.min.js"></script>
 </body>
 </html>
