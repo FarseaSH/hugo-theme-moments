@@ -1,17 +1,29 @@
-{{ $startDate := .Get "startDate" }}
-{{ $endDate := .Get "endDate" }}
+{{ $date := .Get "date" }}
+{{ $useViewDate := .Get "useViewDate" }}
+{{ $rangeStart := .Get "rangeStart" }}
+{{ $rangeEnd := .Get "rangeEnd" }}
 {{ $title := .Get "title" | default "目标日期" }}
-{{ $id := .Page.Date.Unix }}
+{{ $idSeed := printf "%s|%s|%v|%s|%s|%s" .Page.RelPermalink $date $useViewDate $rangeStart $rangeEnd $title }}
+{{ $id := printf "countdown-%s" (substr (md5 $idSeed) 0 10) }}
 
-<div class="countdown-day" id="{{ $id }}">
+<div
+    class="countdown-day"
+    id="{{ $id }}"
+    data-date="{{ $date }}"
+    data-use-view-date="{{ $useViewDate }}"
+    data-range-start="{{ $rangeStart }}"
+    data-range-end="{{ $rangeEnd }}"
+    data-title="{{ $title }}"
+    data-pub-date="{{ .Page.Date.Format "2006-01-02" }}"
+>
     <div class="memorial-header">
         <span class="countdown-title">Calculating...</span>
     </div>
-    
+
     <div class="memorial-counter">
         <div class="counter-number">-</div>
     </div>
-    
+
     <div class="memorial-footer">
         <div class="target-date">
             <span class="date-info">Calculating...</span>
@@ -21,140 +33,249 @@
 
 <script>
 (function() {
-    const widgetId = '{{ $id }}';
-    const startDate = '{{ $startDate }}';
-    const endDate = '{{ $endDate }}';
-    const title = '{{ $title }}';
-    const pubDate = '{{ .Page.Date.Format "2006-01-02" }}';
-    
-    function parseDate(dateStr) {
-        switch(dateStr) {
-            case 'viewDate':
-                return new Date();
-            case 'pubDate':
-                return new Date(pubDate);
-            default:
-                // Assume standard date format YYYY-MM-DD
-                return new Date(dateStr);
+    const widget = document.currentScript ? document.currentScript.previousElementSibling : null;
+    const widgetId = widget ? widget.id : '';
+    const date = widget ? widget.dataset.date || '' : '';
+    const useViewDate = widget ? widget.dataset.useViewDate === 'true' : false;
+    const rangeStart = widget ? widget.dataset.rangeStart || '' : '';
+    const rangeEnd = widget ? widget.dataset.rangeEnd || '' : '';
+    const title = widget ? widget.dataset.title || '目标日期' : '目标日期';
+    const pubDate = widget ? widget.dataset.pubDate || '' : '';
+
+    // console.log('[countdown] init', {
+    //     widgetId: widgetId,
+    //     date: date,
+    //     useViewDate: useViewDate,
+    //     rangeStart: rangeStart,
+    //     rangeEnd: rangeEnd,
+    //     title: title,
+    //     pubDate: pubDate
+    // });
+
+    function parseFixedDate(dateStr) {
+        if (!dateStr) {
+            return null;
         }
+
+        const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateStr);
+        if (!match) {
+            return null;
+        }
+
+        const year = Number(match[1]);
+        const month = Number(match[2]);
+        const day = Number(match[3]);
+        const parsed = new Date(year, month - 1, day);
+
+        if (
+            parsed.getFullYear() !== year ||
+            parsed.getMonth() !== month - 1 ||
+            parsed.getDate() !== day
+        ) {
+            return null;
+        }
+
+        return parsed;
     }
-    
+
+    function getTodayDate() {
+        const now = new Date();
+        return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    }
+
     function getDaysDifference(date1, date2) {
-        // Create new Date objects with time set to 00:00:00
         const d1 = new Date(date1.getFullYear(), date1.getMonth(), date1.getDate());
         const d2 = new Date(date2.getFullYear(), date2.getMonth(), date2.getDate());
-        
-        // Calculate millisecond difference, then convert to days
         const diffInMs = d2.getTime() - d1.getTime();
         return Math.floor(diffInMs / (1000 * 60 * 60 * 24));
     }
-        
-    function calculateDays() {
-        const startDateObj = parseDate(startDate);
-        const endDateObj = parseDate(endDate);
-        const daysDiff = getDaysDifference(startDateObj, endDateObj);
-        
-        return {
-            days: daysDiff,
-            startDateObj: startDateObj,
-            endDateObj: endDateObj
-        };
-    }
-    
-    function formatDateInfo(dateStr, date) {
-        if (dateStr === 'viewDate') {
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            const day = String(date.getDate()).padStart(2, '0');
-            const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
-            const weekday = weekdays[date.getDay()];
-            return `今天(${year}-${month}-${day} ${weekday})`;
-        } else {
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            const day = String(date.getDate()).padStart(2, '0');
-            const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
-            const weekday = weekdays[date.getDay()];
-            return `${year}-${month}-${day} ${weekday}`;
+
+    function formatDateInfo(date, label) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+
+        if (!label) {
+            return `${year}-${month}-${day}`;
         }
+
+        return `${label}(${year}-${month}-${day})`;
     }
 
     function adjustFontSize(element) {
         const container = element.parentElement;
-        const containerWidth = container.clientWidth - 20; // Subtract padding
-        
-        // Set initial font size
+        const containerWidth = container.clientWidth - 20;
         let fontSize = 120;
+
         element.style.fontSize = fontSize + 'px';
-        
-        // Gradually decrease font size until text fits container width
+
         while (element.scrollWidth > containerWidth && fontSize > 80) {
-            console.log(fontSize)
             fontSize -= 10;
             element.style.fontSize = fontSize + 'px';
         }
-        
-        // If font is too small, try to increase it
-        while (element.scrollWidth < containerWidth && fontSize < 24) {
+
+        while (element.scrollWidth < containerWidth && fontSize < 120) {
             const testSize = fontSize + 0.5;
             element.style.fontSize = testSize + 'px';
-            
+
             if (element.scrollWidth > containerWidth) {
                 element.style.fontSize = fontSize + 'px';
                 break;
             }
+
             fontSize = testSize;
         }
     }
-    
+
+    function getConfig() {
+        const hasDate = Boolean(date);
+        const hasRangeStart = Boolean(rangeStart);
+        const hasRangeEnd = Boolean(rangeEnd);
+        const hasRange = hasRangeStart || hasRangeEnd;
+
+        // console.log('[countdown] getConfig:start', {
+        //     hasDate: hasDate,
+        //     hasRangeStart: hasRangeStart,
+        //     hasRangeEnd: hasRangeEnd,
+        //     hasRange: hasRange
+        // });
+
+        if (hasDate && hasRange) {
+            // console.log('[countdown] getConfig:error', 'date 和 rangeStart/rangeEnd 不能同时使用');
+            return { error: 'date 和 rangeStart/rangeEnd 不能同时使用' };
+        }
+
+        if (!hasDate && !hasRange) {
+            // console.log('[countdown] getConfig:error', '必须填写 date，或同时填写 rangeStart 和 rangeEnd');
+            return { error: '必须填写 date，或同时填写 rangeStart 和 rangeEnd' };
+        }
+
+        if (hasRangeStart !== hasRangeEnd) {
+            // console.log('[countdown] getConfig:error', 'rangeStart 和 rangeEnd 必须同时填写');
+            return { error: 'rangeStart 和 rangeEnd 必须同时填写' };
+        }
+
+        if (hasRange) {
+            const startDateObj = parseFixedDate(rangeStart);
+            const endDateObj = parseFixedDate(rangeEnd);
+
+            // console.log('[countdown] getConfig:rangeParsed', {
+            //     rangeStart: rangeStart,
+            //     rangeEnd: rangeEnd,
+            //     startDateObj: startDateObj,
+            //     endDateObj: endDateObj
+            // });
+
+            if (!startDateObj || !endDateObj) {
+                // console.log('[countdown] getConfig:error', 'rangeStart 和 rangeEnd 只能使用 YYYY-MM-DD 格式');
+                return { error: 'rangeStart 和 rangeEnd 只能使用 YYYY-MM-DD 格式' };
+            }
+
+            if (getDaysDifference(startDateObj, endDateObj) <= 0) {
+                // console.log('[countdown] getConfig:error', 'rangeStart 必须早于 rangeEnd');
+                return { error: 'rangeStart 必须早于 rangeEnd' };
+            }
+
+            // console.log('[countdown] getConfig:success', {
+            //     mode: 'range',
+            //     useViewDate: false,
+            //     startDateObj: startDateObj,
+            //     endDateObj: endDateObj
+            // });
+            return {
+                mode: 'range',
+                useViewDate: false,
+                startDateObj: startDateObj,
+                endDateObj: endDateObj
+            };
+        }
+
+        const targetDateObj = parseFixedDate(date);
+        const baseDateObj = useViewDate ? getTodayDate() : parseFixedDate(pubDate);
+
+        // console.log('[countdown] getConfig:dateParsed', {
+        //     date: date,
+        //     targetDateObj: targetDateObj,
+        //     baseDateObj: baseDateObj,
+        //     useViewDate: useViewDate
+        // });
+
+        if (!targetDateObj) {
+            // console.log('[countdown] getConfig:error', 'date 只能使用 YYYY-MM-DD 格式');
+            return { error: 'date 只能使用 YYYY-MM-DD 格式' };
+        }
+
+        // console.log('[countdown] getConfig:success', {
+        //     mode: 'date',
+        //     useViewDate: useViewDate,
+        //     startDateObj: baseDateObj,
+        //     endDateObj: targetDateObj
+        // });
+        return {
+            mode: 'date',
+            useViewDate: useViewDate,
+            startDateObj: baseDateObj,
+            endDateObj: targetDateObj
+        };
+    }
+
     function updateDisplay() {
-        const widget = document.getElementById(widgetId);
+        // console.log('[countdown] updateDisplay:start', {
+        //     widgetId: widgetId,
+        //     widgetFound: Boolean(widget)
+        // });
         if (!widget) return;
-        
-        const result = calculateDays();
+
         const counterElement = widget.querySelector('.counter-number');
         const dateInfoElement = widget.querySelector('.date-info');
         const titleElement = widget.querySelector('.countdown-title');
         const headerElement = widget.querySelector('.memorial-header');
-        
-        // Update days display
-        counterElement.textContent = Math.abs(result.days);
-        
-        // Update title and background color: based on the relationship between startDate and endDate
-        let prefix = "";
-        if (result.days >= 0) {
-            // startDate <= endDate: countdown logic
-            titleElement.textContent = `距 ${title} 还有`;
-            headerElement.classList.remove('past');
-            prefix = '目标日';
-        } else {
-            // startDate > endDate: elapsed time logic
-            titleElement.textContent = `距 ${title} 已经`;
+        const config = getConfig();
+
+        // console.log('[countdown] updateDisplay:config', config);
+
+        if (config.error) {
+            counterElement.textContent = '--';
+            titleElement.textContent = '倒计时参数错误';
+            dateInfoElement.textContent = config.error;
             headerElement.classList.add('past');
-            prefix = '起始日';
-        }
-        
-        // Update date information
-        const startInfo = formatDateInfo(startDate, result.startDateObj);
-        const endInfo = formatDateInfo(endDate, result.endDateObj);
-        
-        if (startDate === 'viewDate' && endDate !== 'viewDate') {
-            dateInfoElement.textContent = `${prefix}: ${endInfo}`;
-        } else if (startDate !== 'viewDate' && endDate === 'viewDate') {
-            dateInfoElement.textContent = `${prefix}: ${startInfo}`;
-        } else if (startDate === 'viewDate' && endDate === 'viewDate') {
-            dateInfoElement.textContent = startInfo;
-        } else {
-            dateInfoElement.textContent = `${startInfo} → ${endInfo}`;
+            adjustFontSize(counterElement);
+            // console.log('[countdown] updateDisplay:errorRendered', {
+            //     widgetId: widgetId,
+            //     error: config.error
+            // });
+            return;
         }
 
+        const days = getDaysDifference(config.startDateObj, config.endDateObj);
+        const isPast = days < 0;
 
-        const numberElement = widget.querySelector(".counter-number");
-        adjustFontSize(numberElement);
+        counterElement.textContent = Math.abs(days);
+        titleElement.textContent = config.useViewDate
+            ? `${title} 距今${isPast ? '已经' : '还有'}`
+            : `${title} ${isPast ? '已经' : '还有'}`;
+        headerElement.classList.toggle('past', isPast);
+
+        const baseDateText = config.useViewDate
+            ? formatDateInfo(config.startDateObj, '今天')
+            : formatDateInfo(config.startDateObj);
+        const targetDateText = formatDateInfo(config.endDateObj);
+
+        dateInfoElement.textContent = isPast
+            ? [targetDateText, baseDateText].join(' → ')
+            : [baseDateText, targetDateText].join(' → ');
+
+        adjustFontSize(counterElement);
+        // console.log('[countdown] updateDisplay:done', {
+        //     widgetId: widgetId,
+        //     days: days,
+        //     isPast: isPast,
+        //     counterText: counterElement.textContent,
+        //     titleText: titleElement.textContent,
+        //     dateInfoText: dateInfoElement.textContent
+        // });
     }
-    
-    
-    // Execute after DOM is loaded
+
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', updateDisplay);
     } else {

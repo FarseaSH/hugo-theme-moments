@@ -231,10 +231,12 @@ note: 直接视频资源示例
 
 倒计时功能不是 front matter 字段，而是通过 shortcode 使用。
 
+> 注意：以下 `countdown-day` 功能当前仅在最新 `dev` 开发版中可用。
+
 当前 shortcode：
 
 ```md
-{{< countdown-day startDate="viewDate" endDate="pubDate" title="倒数日功能推出" >}}
+{{< countdown-day date="2025-08-01" title="倒数日功能推出" >}}
 ```
 
 完整示例：
@@ -248,23 +250,94 @@ tags:
 
 测试一下倒计时功能
 
-{{< countdown-day startDate="viewDate" endDate="pubDate" title="倒数日功能推出" >}}
+{{< countdown-day date="2025-08-01" title="倒数日功能推出" >}}
 ```
 
 ### `countdown-day` 参数说明
 
 | 参数 | 说明 |
 | --- | --- |
-| `startDate` | 起始日期，可以填具体日期，也可以填 `viewDate` 或 `pubDate` |
-| `endDate` | 结束日期，可以填具体日期，也可以填 `viewDate` 或 `pubDate` |
+| `date` | 固定日期，只能填 `YYYY-MM-DD` |
+| `useViewDate` | 可选布尔值，填 `true` 时按访客打开页面当天比较；不填时默认按当前 Moment 的 `pubDate` 比较 |
+| `rangeStart` | 固定起始日期，只能填 `YYYY-MM-DD` |
+| `rangeEnd` | 固定结束日期，只能填 `YYYY-MM-DD` |
 | `title` | 倒计时标题 |
 
-说明：
+更推荐按下面 3 种情况来理解这个 shortcode。
 
-- `viewDate` 表示访客打开页面当天
-- `pubDate` 表示当前这条 Moment 的发布日期
-- 如果 `startDate <= endDate`，展示“还有 X 天”
-- 如果 `startDate > endDate`，展示“已经 X 天”
+#### 情况 1：某个日期，相对当前 Moment 的发布日期
+
+填写方式：
+
+```md
+{{< countdown-day date="2025-08-01" title="倒数日功能推出" >}}
+```
+
+适合场景：
+
+- 想表达某个固定日期相对这条 Moment 发布日还有多少天
+- 或某个固定日期相对这条 Moment 发布日已经过去多少天
+
+显示规则：
+
+- 比较基准是当前 Moment 的 `pubDate`
+- 如果目标日在 `pubDate` 之后，标题显示为 `XXXX 还有`
+- 如果目标日在 `pubDate` 之前，标题显示为 `XXXX 已经`
+- 底部显示日期区间，未来态为 `pubDate → date`，过去态为 `date → pubDate`
+
+#### 情况 2：某个日期，相对访客打开页面的当天
+
+填写方式：
+
+```md
+{{< countdown-day date="2025-08-01" useViewDate=true title="倒数日功能推出" >}}
+```
+
+适合场景：
+
+- 标准倒计时
+- 想表达今天距离某个固定日期还有多少天
+- 或某个固定日期距离今天已经过去多少天
+
+显示规则：
+
+- 比较基准是访客打开页面当天
+- 如果目标日在今天之后，标题显示为 `XXXX 距今还有`
+- 如果目标日在今天之前，标题显示为 `XXXX 距今已经`
+- 底部显示日期区间，未来态为 `今天(YYYY-MM-DD) → date`，过去态为 `date → 今天(YYYY-MM-DD)`
+
+#### 情况 3：两个固定日期之间的区间比较
+
+填写方式：
+
+```md
+{{< countdown-day rangeStart="2025-01-01" rangeEnd="2025-12-31" title="2025 年" >}}
+```
+
+适合场景：
+
+- 只想比较两个固定日期之间相差多少天
+
+显示规则：
+
+- 只比较 `rangeStart` 和 `rangeEnd`
+- `rangeStart` 必须早于 `rangeEnd`
+- 标题显示为 `XXXX 还有`
+- 底部显示完整区间 `rangeStart → rangeEnd`
+
+#### 约束规则
+
+- `date` 和 `rangeStart/rangeEnd` 不能混用
+- `useViewDate` 只在 `date` 模式下生效
+- `date`、`rangeStart`、`rangeEnd` 都只能填写 `YYYY-MM-DD`
+
+示例：
+
+```md
+{{< countdown-day date="2025-08-01" title="相对发布日期" >}}
+{{< countdown-day date="2025-08-01" useViewDate=true title="相对今天" >}}
+{{< countdown-day rangeStart="2025-01-01" rangeEnd="2025-12-31" title="2025 年" >}}
+```
 
 ## 12. 可折叠内容 Moment
 
@@ -341,4 +414,3 @@ note: 置顶示例
 - `link_logo`
 - `video`
 - `top`
-
