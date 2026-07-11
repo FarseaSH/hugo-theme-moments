@@ -46,4 +46,28 @@
         font-size: 16px;
         border-top: 1px solid #eee;
     }
+
+    @media (max-width: 576px) {
+        max-width: 320px;
+        margin: 16px auto;
+
+        .memorial-header {
+            padding: 14px;
+            font-size: 20px;
+        }
+
+        .memorial-counter {
+            padding: 42px 16px;
+        }
+
+        .counter-number {
+            font-size: clamp(72px, 25vw, 96px);
+            margin-bottom: 14px;
+        }
+
+        .memorial-footer {
+            padding: 14px;
+            font-size: 14px;
+        }
+    }
 }

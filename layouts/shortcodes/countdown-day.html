@@ -105,16 +105,20 @@
     function adjustFontSize(element) {
         const container = element.parentElement;
         const containerWidth = container.clientWidth - 20;
-        let fontSize = 120;
+        const isMobile = window.matchMedia('(max-width: 576px)').matches;
+        const minFontSize = isMobile ? 72 : 80;
+        const maxFontSize = isMobile ? 96 : 120;
+        const decrement = isMobile ? 8 : 10;
+        let fontSize = maxFontSize;
 
         element.style.fontSize = fontSize + 'px';
 
-        while (element.scrollWidth > containerWidth && fontSize > 80) {
-            fontSize -= 10;
+        while (element.scrollWidth > containerWidth && fontSize > minFontSize) {
+            fontSize -= decrement;
             element.style.fontSize = fontSize + 'px';
         }
 
-        while (element.scrollWidth < containerWidth && fontSize < 120) {
+        while (element.scrollWidth < containerWidth && fontSize < maxFontSize) {
             const testSize = fontSize + 0.5;
             element.style.fontSize = testSize + 'px';
 
