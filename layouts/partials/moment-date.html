@@ -1,0 +1,16 @@
+{{ $page := .page }}
+{{ $dateStyle := $page.Site.Params.dateStyle | default "classic" | printf "%v" | lower }}
+{{ $datetime := $page.Date.Format "2006-01-02T15:04:05Z07:00" }}
+
+{{ if eq $dateStyle "large-day" }}
+    <time class="moment-date moment-date--large-day" datetime="{{ $datetime }}">
+        <span class="moment-date__day">{{ $page.Date.Format "2" }}</span>
+        <span class="moment-date__year-month">{{ $page.Date.Format "2006 / 01" }}</span>
+        <span class="moment-date__weekday">{{ $page.Date.Format "Mon" }}</span>
+    </time>
+{{ else }}
+    <time class="moment-date moment-date--classic" datetime="{{ $datetime }}">
+        <span class="moment-date__month-day">{{ $page.Date.Format "Jan 2" }}{{ if in (slice 1 21 31) $page.Date.Day }}st{{ else if in (slice 2 22) $page.Date.Day }}nd{{ else if in (slice 3 23) $page.Date.Day }}rd{{ else }}th{{ end }}</span>
+        <span class="moment-date__year">{{ $page.Date.Format "2006" }}</span>
+    </time>
+{{ end }}

@@ -5,11 +5,8 @@
     <div class="pure-g">
 
         {{/* time info shown in the left (or above in small screens) */}}
-        <div class="pure-u-1 pure-u-sm-1-4">
-            <div class="time">
-                <div class="month-day">{{ $page.Date.Format "Jan 2"}}{{ if in (slice 1 21 31) $page.Date.Day}}st{{ else if in (slice 2 22) $page.Date.Day}}nd{{ else if in (slice 3 23) $page.Date.Day}}rd{{ else }}th{{ end }}</div>
-                <div class="year">{{ $page.Date.Format "2006"}}</div>
-            </div>
+        <div class="pure-u-1 pure-u-sm-1-4 moment-date-column">
+            {{ partial "moment-date.html" (dict "page" $page) }}
         </div>
 
         {{/* moment-main-content */}}

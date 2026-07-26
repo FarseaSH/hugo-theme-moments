@@ -1,0 +1,92 @@
+.moment-date--classic {
+    display: block;
+    margin-bottom: 20px;
+    padding-right: 80px;
+    text-align: right;
+    font-weight: 300;
+
+    .moment-date__month-day,
+    .moment-date__year {
+        display: block;
+    }
+
+    .moment-date__month-day {
+        margin-bottom: 10px;
+        font-size: 24px;
+    }
+
+    .moment-date__year {
+        font-size: 16px;
+    }
+}
+
+.moment-date--large-day {
+    display: block;
+    margin-bottom: 20px;
+    padding-right: 80px;
+    text-align: right;
+    font-family: Didot, "Bodoni 72", "Bodoni MT", serif;
+    font-weight: 300;
+    font-variant-numeric: lining-nums tabular-nums;
+
+    > span {
+        display: block;
+    }
+
+    .moment-date__day {
+        font-size: 48px;
+        line-height: 0.95;
+    }
+
+    .moment-date__year-month {
+        margin-top: 5px;
+        color: #8a9297;
+        font-size: 14px;
+        line-height: 1;
+        white-space: nowrap;
+    }
+
+    .moment-date__weekday {
+        margin-top: 5px;
+        color: #8a9297;
+        font-size: 13px;
+        line-height: 1;
+    }
+
+    @media (max-width: 576px) {
+        .moment-date__year-month,
+        .moment-date__weekday {
+            display: inline-block;
+            margin-top: 5px;
+            vertical-align: baseline;
+        }
+
+        .moment-date__year-month::after {
+            display: inline-block;
+            margin: 0 6px;
+            content: "·";
+        }
+    }
+}
+
+@media (max-width: 720px) and (min-width: 576px) {
+    .moment-date--classic,
+    .moment-date--large-day {
+        padding-right: 40px;
+    }
+}
+
+@media (max-width: 576px) {
+    .moment-date-column {
+        width: 100% !important;
+    }
+
+    .moment-date {
+        box-sizing: border-box;
+        width: 100%;
+        padding-right: 0;
+        padding-left: 0;
+        text-align: center;
+    }
+
+}
